@@ -1,5 +1,5 @@
 # Projeto de SO
-Simulação de um Sistema Operacional desenvolvido em C.
+Simulação de substituição de página através do algoritmo WS em um sistema operacional desenvolvido em C++.
 
 Cadeira: Sistemas Operacionais
 
