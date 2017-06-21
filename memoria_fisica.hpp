@@ -1,5 +1,5 @@
-#ifndef _MEMORIA_FISICA_HPP_
-#define _MEMORIA_FISICA_HPP_
+#ifndef MEMORIA_FISICA_HPP
+#define MEMORIA_FISICA_HPP
 
 //#include <>
 
