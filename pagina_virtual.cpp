@@ -1,10 +1,10 @@
 #include "pagina_virtual.hpp"
 
-PaginaVirtual::PaginaVirtual(){
-	this->refer = false;
-	this->modif = false;
-	this->pres = false;
-	this->moldura_pagina = 0;
+PaginaVirtual::PaginaVirtual(bool pBitR, bool pBitM, bool pBitP, double pMolduraPagina ){
+	this->refer = pBitR;
+	this->modif = pBitM;
+	this->pres = pBitP;
+	this->moldura_pagina = pMolduraPagina;
 }
 
 void PaginaVirtual::referenciar(bool bit){
