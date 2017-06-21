@@ -3,7 +3,7 @@
 
 class PaginaVirtual {
 public:
-	PaginaVirtual();
+	PaginaVirtual(bool, bool, bool, double);
 	void referenciar(bool);
 	bool referenciada();
 	void modificar(bool);

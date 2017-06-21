@@ -14,7 +14,7 @@ int main(int argc, char **argv){
 
 	MemoriaFisica mem_fisica(TAMANHO_MEMORIA);
 //	MemoriaVirtual mem_virtual(TAMANHO_MEMORIA_VIRTUAL);
-	PaginaVirtual pagina;
+	PaginaVirtual pagina(false, false, false, 000);
 
 	return 0;
 }
