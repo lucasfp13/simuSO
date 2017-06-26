@@ -1,7 +1,5 @@
 #include <iostream>
-#include <stdio.h>
 #include "memoria_fisica.hpp"
-#include "pagina_virtual.hpp"
 
 using namespace std;
 
@@ -12,9 +10,9 @@ int main(int argc, char **argv){
 
 	//	Testes temporários
 
-	MemoriaFisica mem_fisica(TAMANHO_MEMORIA);
+	MemoriaFisica *mem_fisica = new MemoriaFisica(TAMANHO_MEMORIA);
 //	MemoriaVirtual mem_virtual(TAMANHO_MEMORIA_VIRTUAL);
-	PaginaVirtual pagina(false, false, false, 000);
+	//PaginaVirtual pagina(false, false, false, 000);
 
 	return 0;
 }

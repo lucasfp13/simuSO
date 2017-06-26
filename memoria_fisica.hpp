@@ -1,16 +1,17 @@
 #ifndef MEMORIA_FISICA_HPP
 #define MEMORIA_FISICA_HPP
 
-//#include <>
+#include <stdlib.h>
 
 class MemoriaFisica {
-public:
-	MemoriaFisica(int);
-	void setMemoriaFisica(int, int);
-	int getMemoriaFisica(int);
+	public:
+		MemoriaFisica(int);
+		void setValorMemoriaFisica(int, int);
+		int *getMemoriaFisica();
+		int getValorMemoriaFisica(int);
 
-private:
-	int memoria_fisica[];
+	private:
+		int *memoria_fisica;
 };
 
 #endif
