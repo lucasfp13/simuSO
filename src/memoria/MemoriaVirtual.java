@@ -2,7 +2,7 @@ package memoria;
 
 import java.util.ArrayList;
 
-public class MemoriaVirtual implements Memoria {
+public class MemoriaVirtual {
 	private int indice;
 	private int tamanho;
 	private ArrayList <PaginaVirtual> listaMemoriaVirtual;
@@ -24,31 +24,15 @@ public class MemoriaVirtual implements Memoria {
 	public int getIndice() {
 		return this.indice;
 	}
-
-	@Override
-	public Memoria getpagina() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Memoria getpagina(int pIndice) {
+		return (Memoria) this.listaMemoriaVirtual.get(pIndice);
 	}
 
-	@Override
-	public void setValor() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getValor() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setIndice(int pIndice) {
 		this.indice = pIndice;
 	}
 
-	@Override
 	public void alocar() {
 		for (int i = 0; i < this.tamanho; i++) {
 			this.listaMemoriaVirtual.add(new PaginaVirtual(i));

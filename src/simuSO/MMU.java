@@ -4,12 +4,16 @@ import memoria.*;
 public class MMU {
     private MemoriaFisica memoriaFisica;
     private MemoriaVirtual memoriaVirtual;
+    private MemoriaHd memoriaHd;
+    private static String localHd = ".\\memoria\\memoriaHd.txt";
+    private int indiceInstrucao;
     
     public MMU(int pTamanhoMemoria) {
     	int tamanhoMemoriaFisica = pTamanhoMemoria;
     	int tamanhoMemoriaVirtual = tamanhoMemoriaFisica * 2;
     	this.memoriaFisica = new MemoriaFisica(tamanhoMemoriaFisica);
         this.memoriaVirtual = new MemoriaVirtual(tamanhoMemoriaVirtual);
+        this.memoriaHd = new MemoriaHd(localHd, pTamanhoMemoria);
     }
     
     public PaginaVirtual getPagina(int pIndice) {
@@ -19,7 +23,7 @@ public class MMU {
     public boolean executarInstrucao(char pTipo, int pIndice) {
 
         if (pIndice > this.memoriaVirtual.getTamanho()) {
-                return false;
+        	return false;
         }
         
         if (pTipo == 'R') {
@@ -66,9 +70,21 @@ public class MMU {
 		
 	}
 	
-	private void trocaPagona() {
-		
-	}
+	public void setValorHd(PaginaVirtual pPagina, int pIndice){
 
+    }
+	
+	public void setValor(PaginaVirtual pPagina) { // vai ser usando quando fazer a troca de página
+        int indiceMemoriaFisica = pPagina.getIndice();
+        
+        pPagina.presenca(false);
+        this.memoriaVirtual.getPagina(this.indiceInstrucao).setIndice(indiceMemoriaFisica);
+        this.memoriaVirtual.getPagina(this.indiceInstrucao).referenciar(true);
+        this.memoriaVirtual.getPagina(this.indiceInstrucao).presenca(true);
+
+        int valorHd = memoriaHd.getValorBloco(this.indiceInstrucao).getValor();
+        
+        this.memoriaFisica.setValor(this.indiceInstrucao, valorHd);
+    }
     
 }
