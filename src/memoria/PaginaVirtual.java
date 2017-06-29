@@ -6,6 +6,7 @@ public class PaginaVirtual {
 	private boolean modificada;
 	private boolean presente;
 	private int moldura_pagina;
+	private int indice;
 	
 	public PaginaVirtual() {
 		
@@ -49,4 +50,13 @@ public class PaginaVirtual {
 	public int getMolduraPagina() {
 		return this.moldura_pagina;
 	}
+	
+	public void setIndice(int pIndice) {
+	    this.indice = pIndice;
+	}
+	
+	public int getIndice() {
+		return this.indice;
+	}
+	
 }

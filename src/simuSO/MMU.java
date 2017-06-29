@@ -28,6 +28,10 @@ public class MMU {
       
     }
 
+    public void referenciarMemoriaVirtual(int pIndice){
+        this.memoriaVirtual.getPagina(pIndice).setIndice(pIndice);
+    }
+
 	private void escreva(int pIndice) {
 		boolean t = this.memoriaVirtual.getPagina(pIndice).presente();
 		

@@ -10,9 +10,10 @@ public class MemoriaFisica {
 	public MemoriaFisica(int pTamanho) {
 		this.tamanho = pTamanho;
 		this.listaMemoriaFisica = new ArrayList<>();
+		this.alocar();
 	}
 	
-	public void alocar() {
+	private void alocar() {
 		for (int i = 0; i < this.tamanho; i++) {
 			this.listaMemoriaFisica.add(new PaginaFisica());
 		}

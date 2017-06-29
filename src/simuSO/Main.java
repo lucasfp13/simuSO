@@ -3,6 +3,7 @@ package simuSO;
 public class Main {
 	public static void main(String[] args) {
 		MMU mmu = new MMU(16);
-		mmu.executarInstrucao('w', 0);
+		mmu.referenciarMemoriaVirtual(0);
+		mmu.executarInstrucao('r', 0);
 	}
 }
