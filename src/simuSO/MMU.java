@@ -17,24 +17,42 @@ public class MMU {
         }
         
         if (pTipo == 'R') {
-        	this.leia();
+        	this.leia(pIndice);
         }
         
         if (pTipo == 'W') {
-        	this.escreva();
+        	this.escreva(pIndice);
         }
         
         return true;
       
     }
 
-	private void escreva() {
-		// putaria
+	private void escreva(int pIndice) {
+		boolean t = this.memoriaVirtual.getPagina(pIndice).presente();
+		
+		if (t) {
+			System.out.println("tá na memoria fisica");
+		}
+		else {
+			System.out.println("não tá na memoria fisica");
+		}
 		
 	}
 
-	private void leia() {
-		// putaria
+	private void leia(int pIndice) {
+		boolean t = this.memoriaVirtual.getPagina(pIndice).presente();
+		
+		if (t) {
+			System.out.println("tá na memoria fisica");
+		}
+		else {
+			System.out.println("não tá na memoria fisica");
+		}
+		
+	}
+	
+	private void trocaPagona() {
 		
 	}
 
