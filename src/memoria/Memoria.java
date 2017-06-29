@@ -1,7 +1,9 @@
 package memoria;
 
-public class Memoria {
-	private int valor;
-	private int indice;
-	
+public interface Memoria {
+	public Memoria getpagina();
+	public void setValor();
+	public void getValor();
+	public void setIndice(int pIndice);
+	public void alocar();
 }
