@@ -2,9 +2,9 @@ package memoria;
 
 public class PaginaVirtual {
 	
-	private boolean referencia_;
-	private boolean modificada_;
-	private boolean presente_;
+	private boolean referencia;
+	private boolean modificada;
+	private boolean presente;
 	private int moldura_pagina;
 	
 	public PaginaVirtual() {
@@ -12,34 +12,34 @@ public class PaginaVirtual {
 	}
 	
 	PaginaVirtual(boolean pBitR, boolean pBitM, boolean pBitP, int pMolduraPagina) {
-		this.referencia_ = pBitR;
-		this.modificada_ = pBitM;
-		this.presente_ = pBitP;
+		this.referencia = pBitR;
+		this.modificada = pBitM;
+		this.presente = pBitP;
 		this.moldura_pagina = pMolduraPagina;
 	}
 	
 	public void referenciar(boolean bit) {
-		this.referencia_ = bit;
+		this.referencia = bit;
 	}
 	
 	public boolean referenciada() {
-		return this.referencia_;
+		return this.referencia;
 	}
 	
 	public void modificar(boolean bit) {
-		this.modificada_ = bit;
+		this.modificada = bit;
 	}
 	
 	public boolean modificada() {
-		return this.modificada_;
+		return this.modificada;
 	}
 	
 	public void presenca(boolean bit) {
-		this.presente_ = bit;
+		this.presente = bit;
 	}
 	
 	public boolean presente() {
-		return this.presente_;
+		return this.presente;
 	}
 	
 	public void setMolduraPagina(int pMolduraPagina) {
