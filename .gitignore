@@ -1,5 +1,0 @@
-// Ignorar arquivos .o gerados na linkagem
-*.o
-
-// Ignorar arquivos .exe gerados na linkagem
-*.exe
