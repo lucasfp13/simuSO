@@ -8,8 +8,8 @@ public class PaginaVirtual {
 	private int moldura_pagina;
 	private int indice;
 	
-	public PaginaVirtual() {
-		
+	public PaginaVirtual(int pIndice) {
+		setIndice(pIndice);
 	}
 	
 	PaginaVirtual(boolean pBitR, boolean pBitM, boolean pBitP, int pMolduraPagina) {
