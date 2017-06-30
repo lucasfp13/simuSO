@@ -5,18 +5,23 @@ public class PaginaVirtual {
 	private boolean referencia;
 	private boolean modificada;
 	private boolean presente;
-	private int moldura_pagina;
 	private int indice;
+	private int contador;
 	
-	public PaginaVirtual(int pIndice) {
-		setIndice(pIndice);
+	public PaginaVirtual() {
+		referenciar(false);
+		modificar(false);
+		presenca(false);
+		setContador(0);
+		setIndice(-1);
 	}
 	
-	PaginaVirtual(boolean pBitR, boolean pBitM, boolean pBitP, int pMolduraPagina) {
-		this.referencia = pBitR;
-		this.modificada = pBitM;
-		this.presente = pBitP;
-		this.moldura_pagina = pMolduraPagina;
+	public void atualizar(boolean pReferenciada, boolean pModificada, boolean pPresente, int pIndice) {
+		referenciar(pReferenciada);
+		modificar(pModificada);
+		presenca(pPresente);
+		setContador(0);
+		setIndice(pIndice);
 	}
 	
 	public void referenciar(boolean bit) {
@@ -43,20 +48,20 @@ public class PaginaVirtual {
 		return this.presente;
 	}
 	
-	public void setMolduraPagina(int pMolduraPagina) {
-		this.moldura_pagina = pMolduraPagina;
-	}
-	
-	public int getMolduraPagina() {
-		return this.moldura_pagina;
-	}
-	
 	public void setIndice(int pIndice) {
 	    this.indice = pIndice;
 	}
 	
 	public int getIndice() {
 		return this.indice;
+	}
+	
+	public void setContador(int pContador) {
+		this.contador = pContador;
+	}
+	
+	public int getContador() {
+		return this.contador;
 	}
 	
 }

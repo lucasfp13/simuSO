@@ -1,6 +1,6 @@
 package simuSO;
 
-public class Main {
+public class So {
 	public static void main(String[] args) {
 		//MMU mmu = new MMU(16);
 		//mmu.referenciarMemoriaVirtual(0);

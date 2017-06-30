@@ -35,7 +35,7 @@ public class MemoriaVirtual {
 
 	public void alocar() {
 		for (int i = 0; i < this.tamanho; i++) {
-			this.listaMemoriaVirtual.add(new PaginaVirtual(i));
+			this.listaMemoriaVirtual.add(new PaginaVirtual());
 		}
 	}
 	

@@ -10,7 +10,7 @@ public class MMU {
     
     public MMU(int pTamanhoMemoria) {
     	int tamanhoMemoriaFisica = pTamanhoMemoria;
-    	int tamanhoMemoriaVirtual = tamanhoMemoriaFisica * 2;
+    	int tamanhoMemoriaVirtual = tamanhoMemoriaFisica * 2; // Memoria virtual é o dobro da fisica
     	this.memoriaFisica = new MemoriaFisica(tamanhoMemoriaFisica);
         this.memoriaVirtual = new MemoriaVirtual(tamanhoMemoriaVirtual);
         this.memoriaHd = new MemoriaHd(localHd, pTamanhoMemoria);
@@ -22,16 +22,16 @@ public class MMU {
     
     public boolean executarInstrucao(char pTipo, int pIndice) {
 
-        if (pIndice > this.memoriaVirtual.getTamanho()) {
+        if (pIndice > this.memoriaVirtual.getTamanho()) { // retorna false pois o indice excedeu o tamanho da memória virtual
         	return false;
         }
         
         if (pTipo == 'R') {
-        	this.leia(pIndice);
+        	this.ler(pIndice);
         }
         
         if (pTipo == 'W') {
-        	this.escreva(pIndice);
+        	this.escrever(pIndice);
         }
         
         return true;
@@ -42,7 +42,7 @@ public class MMU {
         this.memoriaVirtual.getPagina(pIndice).setIndice(pIndice);
     }
 
-	private void escreva(int pIndice) {
+	private void escrever(int pIndice) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
 		boolean testePresenca = this.memoriaVirtual.getPagina(pIndice).presente();
 		if (testePresenca) {
 			PaginaVirtual pagina = memoriaVirtual.getPagina(pIndice);
@@ -58,7 +58,7 @@ public class MMU {
 		
 	}
 
-	private void leia(int pIndice) {
+	private void ler(int pIndice) {
 		boolean t = this.memoriaVirtual.getPagina(pIndice).presente();
 		
 		if (t) {
