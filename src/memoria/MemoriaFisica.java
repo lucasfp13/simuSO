@@ -9,20 +9,20 @@ public class MemoriaFisica {
 	
 	public MemoriaFisica(int pTamanho) {
 		this.tamanho = pTamanho;
-		this.listaMemoriaFisica = new ArrayList<>();
+		this.listaMemoriaFisica = new ArrayList<PaginaFisica>();
 		this.alocar();
 	}
 	
 	private void alocar() {
 		for (int i = 0; i < this.tamanho; i++) {
-			this.listaMemoriaFisica.add(new PaginaFisica());
+			this.listaMemoriaFisica.add(new PaginaFisica(i));
 		}
 	}
 	
 	public int getPaginaLivre() {
         for (int i = 0; i < this.tamanho; i++) {
-            if (listaMemoriaFisica.get(i) == null) {
-                return i;
+            if (listaMemoriaFisica.get(i).getIndice() != -1) {
+                listaMemoriaFisica.get(i).getIndice();
             }
         }
         return -1;

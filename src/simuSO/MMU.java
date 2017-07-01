@@ -44,7 +44,7 @@ public class MMU {
 
 	private void escrever(int pIndice) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
 		boolean testePresenca = this.memoriaVirtual.getPagina(pIndice).presente();
-		if (testePresenca) {
+		if (testePresenca == true) {
 			PaginaVirtual pagina = memoriaVirtual.getPagina(pIndice);
             int valor = 123456;
             memoriaFisica.setValor(pIndice, valor);
@@ -54,15 +54,18 @@ public class MMU {
 		}
 		else {
 			System.out.println("não tá na memoria fisica");
+			int indiceLivre = memoriaFisica.getPaginaLivre();
+            System.out.println("Página livre : " + indiceLivre);
 		}
 		
 	}
 
 	private void ler(int pIndice) {
 		boolean t = this.memoriaVirtual.getPagina(pIndice).presente();
+		int pgFisica = this.memoriaFisica.getPagina(pIndice).getValor();
 		
 		if (t) {
-			System.out.println("tá na memoria fisica");
+			System.out.println("tá na memoria fisica\nvalor -> " + pgFisica);
 		}
 		else {
 			System.out.println("não tá na memoria fisica");
