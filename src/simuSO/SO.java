@@ -1,5 +1,6 @@
 package simuSO;
 
+import clock.Clock;
 import entrada.*;
 
 public class SO {

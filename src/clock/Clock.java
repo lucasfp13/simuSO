@@ -1,21 +1,26 @@
-package simuSO;
+package clock;
+
+import simuSO.*;
 
 public class Clock implements Runnable {
-
 	private int tempo;
 	private boolean rodando;
 	private static int TIMESTEMP = 100;
-
+	private Dispatcher dispatcher;
+	
 	public Clock() {
 		this.tempo = 0;
 		this.rodando = false;
 	}
 
 	public void run() {
-		while (this.rodando) {
+		while(this.rodando) {
 			try {
 				this.tempo++;
 				Thread.sleep(TIMESTEMP);
+				
+				this.tempo += TIMESTEMP;
+				dispatcher.notificaListener(tempo);
 			} catch (InterruptedException e) {
 				System.out.println(e);
 			}
@@ -30,8 +35,8 @@ public class Clock implements Runnable {
 		this.rodando = false;
 	}
 
-	public int getTempo() {
-		return this.tempo;
+	public void adicionaListener(IClockListener icl){
+		this.dispatcher.adicionaListener(icl);
 	}
 
 }

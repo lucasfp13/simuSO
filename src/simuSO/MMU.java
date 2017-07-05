@@ -1,9 +1,11 @@
 package simuSO;
 
 import memoria.*;
+import clock.*;
 
-public class MMU implements Memoria {
-    private MemoriaVirtual memVirtual;
+public class MMU implements Memoria, IClockListener {
+    private int tempoAtual = 0;
+	private MemoriaVirtual memVirtual;
     private MemoriaFisica memFisica;
     
     public MMU(int pTamanhoMemoriaFisica, int pTamanhoMemoriaVirtual){
@@ -50,4 +52,15 @@ public class MMU implements Memoria {
 			// TODO: handle exception
 		}
 	}   
+    
+    
+    
+    // Para zerar os bits de referenciado das páginas virtuais
+    public void eventoZerarRecebido(int tempoClock){
+    	for(int i = 0; i < memVirtual.getTamanho(); ++i){
+    		memVirtual.getPagina(i).referenciar(false);
+    	}
+    	
+    	this.tempoAtual = tempoClock;
+    }    
 }
