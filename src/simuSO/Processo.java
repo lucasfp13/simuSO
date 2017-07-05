@@ -1,27 +1,37 @@
 package simuSO;
 
-import memoria.PaginaVirtual;
-
 public class Processo implements Runnable {
+	private MMU mmu;
+	private String input;
+	private int id;
 	
-	private PaginaVirtual memoria;
-	private int indice;
-	private int valor;
-	
-	public Processo(PaginaVirtual pMemoria) {
-		this.memoria = pMemoria;
-		this.indice = pMemoria.getIndice();
+	public Processo(MMU pMmu, String pFabricaEntradas, int pId) {
+		this.mmu = pMmu;
+		this.input = pFabricaEntradas;
+		this.id = pId;
 	}
 	
 	@Override
 	public void run() {
-		while(true) {
-			System.out.println("processo consumindo a posição " + this.indice + " da memoria");
+		System.out.println("Executando Processo " + hashCode());
+		String parts[] = input.split(",");
+		
+		for (int i = 0; i < parts.length; i++) {
+			String parts2[] = parts[i].split("-");
+			if(parts2[1] == "W"){
+				mmu.escrever(Integer.parseInt(parts2[0]), parts2[1]);		// WRITE
+				System.out.println("Processo " + this.id + " escrevendo na memória");
+			} else {
+				mmu.ler(Integer.parseInt(parts2[0]), parts2[1]);		// READ
+				System.out.println("Processo " + this.id + " lendo da memória ");
+			}
 		}
-	}
-	
-	public void setValor(int pvalor) {
-		this.valor = pvalor;
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

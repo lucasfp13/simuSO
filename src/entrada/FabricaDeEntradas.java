@@ -5,7 +5,8 @@ import java.util.Random;
 
 
 public class FabricaDeEntradas {
-	public static final int QTD_ACESSO_ENTRADA = 100;
+	public static final int QTD_ACESSO_ENTRADA = 64;
+	public static final int TAMANHO_MEMORIA = 64;
 	private int tamanhoMemoriaVirtual = 0;
 	private int seed;
 	
@@ -13,16 +14,12 @@ public class FabricaDeEntradas {
 		this.tamanhoMemoriaVirtual = tamanhoMemoria;
 		Random r = new Random();
 		this.seed = r.nextInt(tamanhoMemoria);
-		System.out.println("Semente = " + seed);
-		if(tamanhoMemoria < 32) {
+		//System.out.println("Semente = " + seed);
+		if(tamanhoMemoria < TAMANHO_MEMORIA) {
 			throw new IllegalArgumentException("Memória muito pequena - valor mínimo 32");
 		}
-		if(tamanhoMemoria > 64) {
+		if(tamanhoMemoria > TAMANHO_MEMORIA * 2) {
 			throw new IllegalArgumentException("Memória grande - valor máximo 64");
-		}
-		
-		if(QTD_ACESSO_ENTRADA < 25) {
-			throw new IllegalArgumentException("Tamanho da entrada não pode ser menor que 2");
 		}
 	}
 	
@@ -30,7 +27,7 @@ public class FabricaDeEntradas {
 		String value = "";
 		Random r = new Random(this.seed);
 		
-		ArrayList<Integer> reads = new ArrayList<Integer>();
+		ArrayList <Integer> reads = new ArrayList <Integer> ();
 		String[] loop = new String[4];
 		int indexLoop = 0;
 		
@@ -54,6 +51,7 @@ public class FabricaDeEntradas {
 			int endereco = r.nextInt(tamanhoMemoriaVirtual);
 			
 			int index = reads.indexOf(endereco);
+			
 			if(index == -1) {
 				sb.append(endereco + "-R,");
 				loop[indexLoop++] = endereco + "-R,";
@@ -66,6 +64,7 @@ public class FabricaDeEntradas {
 					loop[indexLoop++] = endereco + "-R,";
 					indexLoop = indexLoop % loop.length;
 				} else {
+					int numero = 3;
 					sb.append(endereco + "-W,");
 					loop[indexLoop++] = endereco + "-W,";
 					indexLoop = indexLoop % loop.length;

@@ -1,11 +1,5 @@
 package simuSO;
 
-/*
- * Não sei se seria interessante criar um objeto para o clock
- * A ideia é criar um clock para ser o "contador global" do SO
- */
-
-/*
 public class Clock implements Runnable {
 
 	private int tempo;
@@ -41,4 +35,3 @@ public class Clock implements Runnable {
 	}
 
 }
-*/

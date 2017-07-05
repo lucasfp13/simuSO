@@ -10,32 +10,15 @@ public class MMU implements Memoria {
     	this.memFisica = new MemoriaFisica(pTamanhoMemoriaFisica);
     	this.memVirtual = new MemoriaVirtual(pTamanhoMemoriaVirtual);
     }
-    
-    public boolean executarInstrucao(char pTipo, int pIndice) {
-
-        if (pIndice > this.memVirtual.getTamanho()) { // retorna false pois o indice excedeu o tamanho da memória virtual
-        	return false;
-        }
-        
-        if (pTipo == 'R') {
-        	this.ler(pIndice);
-        }
-        
-        if (pTipo == 'W') {
-        	this.escrever(pIndice);
-        }
-        
-        return true;
-      
-    }
 
     @Override
-	public void escrever(int pIndice) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
+	public void escrever(int pIndice, String pTipo) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
+    	
 		boolean testePresenca = this.memVirtual.getPagina(pIndice).presente();
 		
-		if (testePresenca == true) {
+		if (testePresenca == false) {
 			PaginaVirtual pagina = memVirtual.getPagina(pIndice);
-            int valor = 123456;
+            int valor = 666;
             memFisica.setValor(pIndice, valor);
             pagina.modificar(true);
             pagina.referenciar(true);
@@ -48,16 +31,23 @@ public class MMU implements Memoria {
 	}
 
     @Override
-	public void ler(int pIndice) {
-		boolean t = this.memVirtual.getPagina(pIndice).presente();
-		int pgFisica = this.memFisica.getValor(pIndice);
-		
-		if (t) {
-			System.out.println("tá na memoria fisica\nvalor -> " + pgFisica);
+	public void ler(int pIndice, String pTipo) {
+    	try {
+	    	if(this.memVirtual.getPagina(pIndice) == null) {
+	    		return;
+			} else {
+				boolean t = this.memVirtual.getPagina(pIndice).presente();
+				int pgFisica = this.memFisica.getValor(pIndice);
+				
+				if (t) {
+					System.out.println("valor -> " + pgFisica);
+				}
+				else {
+					System.out.println("não tá na memoria fisica");
+				}
+			}	
+    	}catch (Exception e) {
+			// TODO: handle exception
 		}
-		else {
-			System.out.println("não tá na memoria fisica");
-		}
-		
 	}   
 }

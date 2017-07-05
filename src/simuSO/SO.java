@@ -3,33 +3,28 @@ package simuSO;
 import entrada.*;
 
 public class SO {
+	
+	public static final Clock CLOCK = new Clock();
+	public static final int TAMANHO_MEMORIA_FISICA = 32;
+	public static final int TAMANHO_MEMORIA_VIRTUAL = 64;
+	public static final MMU mmu = new MMU(TAMANHO_MEMORIA_FISICA, TAMANHO_MEMORIA_VIRTUAL);
+	public static final FabricaDeEntradas fab1 = new FabricaDeEntradas(TAMANHO_MEMORIA_VIRTUAL);
+	public static final FabricaDeEntradas fab2 = new FabricaDeEntradas(TAMANHO_MEMORIA_VIRTUAL);
+	
 	public static void main(String[] args) {
-		StringBuffer sb = new StringBuffer();
-		int TAMANHO_MEMORIA_FISICA = 32;
-		int TAMANHO_MEMORIA_VIRTUAL = 64;
 		
-		FabricaDeEntradas fab = new FabricaDeEntradas(TAMANHO_MEMORIA_VIRTUAL);
-		String input = fab.getNewEntrada(); 
-		System.out.println(input);
+		String inputProcesso1 = fab1.getNewEntrada(); 
+		System.out.println("fab1 = " + inputProcesso1);
+		String inputProcesso2 = fab2.getNewEntrada(); 
+		System.out.println("fab2 = " + inputProcesso2);
 		
-		MMU mmu = new MMU(TAMANHO_MEMORIA_FISICA, TAMANHO_MEMORIA_VIRTUAL);
-		//Processo processo = new Processo();
+		Processo processo1 = new Processo(mmu, inputProcesso1, 1);
+		Processo processo2 = new Processo(mmu, inputProcesso2, 2);
 		
-		//Thread p1 = new Thread(processo);
-		
-		//for(int i = 0; i < sb.substring(0, ); ++i){
-			
-			
-			if(mmu.executarInstrucao('W', 0)) {
-				System.out.println("valor escrito!");
-			}
-			else {
-				System.out.println("valor excedeu o tamanho da memória virtual!");
-			}
-			
-			mmu.executarInstrucao('R', 0);
-	//	}
-		
-		//p1.start();
+		Thread p1 = new Thread(processo1);
+		Thread p2 = new Thread(processo2);
+				
+		p1.start();
+		p2.start();
 	}
 }
