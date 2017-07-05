@@ -13,7 +13,7 @@ public class Processo implements Runnable {
 	
 	@Override
 	public void run() {
-		System.out.println("Executando Processo " + hashCode());
+		System.out.println("Executando Processo " + this.id);
 		String parts[] = input.split(",");
 		
 		for (int i = 0; i < parts.length; i++) {

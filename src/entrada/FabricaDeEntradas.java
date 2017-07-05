@@ -5,8 +5,8 @@ import java.util.Random;
 
 
 public class FabricaDeEntradas {
-	public static final int QTD_ACESSO_ENTRADA = 64;
-	public static final int TAMANHO_MEMORIA = 64;
+	public static final int QTD_ACESSO_ENTRADA = 16;
+	public static final int TAMANHO_MEMORIA = 16;
 	private int tamanhoMemoriaVirtual = 0;
 	private int seed;
 	
@@ -20,6 +20,9 @@ public class FabricaDeEntradas {
 		}
 		if(tamanhoMemoria > TAMANHO_MEMORIA * 2) {
 			throw new IllegalArgumentException("Memória grande - valor máximo 64");
+		}
+		if(QTD_ACESSO_ENTRADA < QTD_ACESSO_ENTRADA) {
+			throw new IllegalArgumentException("Tamanho da entrada não pode ser menor que 20");
 		}
 	}
 	
