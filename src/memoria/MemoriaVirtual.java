@@ -14,4 +14,8 @@ public class MemoriaVirtual {
 	public int getTamanho(){
 		return memoriaVirtual.length;
 	}
+	
+	public void setMolduraPagina(int pIndice, int pMolduraPagina){
+		this.memoriaVirtual.getPagina(pIndice).setMolduraPagina(pMolduraPagina);
+	}
 }
