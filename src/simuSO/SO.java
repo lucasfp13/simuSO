@@ -1,23 +1,35 @@
 package simuSO;
 
+import entrada.*;
+
 public class SO {
 	public static void main(String[] args) {
-		MMU mmu = new MMU(16);
-		mmu.referenciarMemoriaVirtual(0);
-		Processo processo = new Processo(mmu.getPagina(0));
+		StringBuffer sb = new StringBuffer();
+		int TAMANHO_MEMORIA_FISICA = 32;
+		int TAMANHO_MEMORIA_VIRTUAL = 64;
 		
-		Thread p1 = new Thread(processo);
+		FabricaDeEntradas fab = new FabricaDeEntradas(TAMANHO_MEMORIA_VIRTUAL);
+		String input = fab.getNewEntrada(); 
+		System.out.println(input);
 		
-		if (mmu.executarInstrucao('W', 0)) {
-			System.out.println("valor escrito!");
-		}
-		else {
-			System.out.println("valor excedeu o tamanho da memória virtual!");
-		}
+		MMU mmu = new MMU(TAMANHO_MEMORIA_FISICA, TAMANHO_MEMORIA_VIRTUAL);
+		//Processo processo = new Processo();
 		
-		mmu.executarInstrucao('R', 0);
+		//Thread p1 = new Thread(processo);
+		
+		//for(int i = 0; i < sb.substring(0, ); ++i){
+			
+			
+			if(mmu.executarInstrucao('W', 0)) {
+				System.out.println("valor escrito!");
+			}
+			else {
+				System.out.println("valor excedeu o tamanho da memória virtual!");
+			}
+			
+			mmu.executarInstrucao('R', 0);
+	//	}
 		
 		//p1.start();
-		
 	}
 }

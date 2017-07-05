@@ -2,7 +2,7 @@ package memoria;
 
 public class PaginaVirtual {
 	
-	private boolean referencia;
+	private boolean referenciada;
 	private boolean modificada;
 	private boolean presente;
 	private int indice;
@@ -25,11 +25,11 @@ public class PaginaVirtual {
 	}
 	
 	public void referenciar(boolean bit) {
-		this.referencia = bit;
+		this.referenciada = bit;
 	}
 	
 	public boolean referenciada() {
-		return this.referencia;
+		return this.referenciada;
 	}
 	
 	public void modificar(boolean bit) {
@@ -62,6 +62,5 @@ public class PaginaVirtual {
 	
 	public int getContador() {
 		return this.contador;
-	}
-	
+	}	
 }
