@@ -1,11 +1,15 @@
 package memoria;
 
-import java.io.BufferedWriter;
 import java.io.File;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class MemoriaHD {
-	private File arquivo = new File("/arquivo.txt");
+	private File arquivo = new File("/hd.txt");
 	public MemoriaHD() {
 		try {
 			if (!arquivo.exists()) {

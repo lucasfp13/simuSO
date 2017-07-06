@@ -27,7 +27,8 @@ public class MMU implements Memoria, IClockListener {
             Integer indiceMemoriaFisica = this.getIndiceMemFisica(this.memFisica.getMemoria()); 
 			
 			if(indiceMemoriaFisica == null){
-				System.out.println("INDICE MEMORIA-FISICA JA UTILIZADO");
+				System.out.println("NAO TEM MAIS ESPAÇO NA MEM FISICA");
+				System.out.println("CHAMA O ALGORITMO WS");
 			} else {
 				pagina.setMolduraPagina(pIndiceVirtual, indiceMemoriaFisica);
 	            pagina.modificar(true);
@@ -37,7 +38,8 @@ public class MMU implements Memoria, IClockListener {
 			}			
 			
 		} else {
-			System.out.println("CHAMA O ALGORITMO WS");
+			System.out.println("JA TEM PAGINA ENDEREÇADA NESSE INDICE DA MEMORIA VIRTUAL");
+			return;
 			//Integer indiceLivre = memFisica.getIndice();
             //System.out.println("Página livre : " + indiceLivre);
 		}
