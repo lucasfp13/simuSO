@@ -1,6 +1,8 @@
 package simuSO;
 
 import memoria.*;
+
+import java.util.Random;
 import clock.*;
 
 public class MMU implements Memoria, IClockListener {
@@ -14,26 +16,35 @@ public class MMU implements Memoria, IClockListener {
     }
 
     @Override
-	public void escrever(int pIndice, String pTipo) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
+	public void escrever(int pIndiceVirtual) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
     	
-		boolean testePresenca = this.memVirtual.getPagina(pIndice).presente();
+		boolean testePresenca = this.memVirtual.getPagina(pIndiceVirtual).presente();
 		
 		if (testePresenca == false) {
-			PaginaVirtual pagina = memVirtual.getPagina(pIndice);
-            int valor = 666;
-            memFisica.setValor(pIndice, valor);
-            pagina.modificar(true);
-            pagina.referenciar(true);
-            System.out.println("Escrevendo valor " + valor + " no indice " + pagina.getIndice() + " da memoria fisica!");
+			PaginaVirtual pagina = memVirtual.getPagina(pIndiceVirtual);
+			Random r = new Random();
+			Integer valor = r.nextInt(100);
+            Integer indiceMemoriaFisica = this.getIndiceMemFisica(this.memFisica.getMemoria()); 
+			
+			if(indiceMemoriaFisica == null){
+				System.out.println("INDICE MEMORIA-FISICA JA UTILIZADO");
+			} else {
+				pagina.setMolduraPagina(pIndiceVirtual, indiceMemoriaFisica);
+	            pagina.modificar(true);
+	            pagina.referenciar(true);
+	            this.memFisica.setValor(indiceMemoriaFisica, valor);
+	            System.out.println("Escreveu valor " + valor + " no indice " + indiceMemoriaFisica + " da memoria fisica!");
+			}			
+			
 		} else {
-			System.out.println("não tá na memoria fisica");
-			int indiceLivre = memFisica.getIndice();
-            System.out.println("Página livre : " + indiceLivre);
+			System.out.println("CHAMA O ALGORITMO WS");
+			//Integer indiceLivre = memFisica.getIndice();
+            //System.out.println("Página livre : " + indiceLivre);
 		}
 	}
 
     @Override
-	public void ler(int pIndice, String pTipo) {
+	public void ler(int pIndice) {
     	try {
 	    	if(this.memVirtual.getPagina(pIndice) == null) {
 	    		return;
@@ -53,7 +64,14 @@ public class MMU implements Memoria, IClockListener {
 		}
 	}   
     
-    
+    public Integer getIndiceMemFisica(Integer[] memFisica) {
+		for(int i = 0; i < memFisica.length; i++){
+			if(memFisica[i] == null){
+				return i;
+			}
+		}
+		return null;
+	}
     
     // Para zerar os bits de referenciado das páginas virtuais
     public void eventoZerarRecebido(int tempoClock){

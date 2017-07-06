@@ -1,11 +1,11 @@
 package memoria;
 
 public class MemoriaFisica {	
-	private int indice;
-	private int[] memoriaFisica;
+	private Integer indice;
+	private Integer[] memoriaFisica;
 	
 	public MemoriaFisica(int pTamanho) {
-		memoriaFisica = new int[pTamanho];
+		memoriaFisica = new Integer[pTamanho];
 	}
 	
 	public int getValor(int pIndice) {
@@ -20,7 +20,11 @@ public class MemoriaFisica {
 		this.indice = pIndice;
 	}
 	
-	public int getIndice() {
+	public Integer getIndice(){
 		return this.indice;
+	}
+	
+	public Integer[] getMemoria() {
+		return this.memoriaFisica;
 	}
 }

@@ -1,10 +1,10 @@
 package memoria;
 
 public class PaginaVirtual {
-	
 	private boolean referenciada;
 	private boolean modificada;
 	private boolean presente;
+	private Integer molduraPagina;
 	private int indice;
 	private int contador;
 	
@@ -12,6 +12,7 @@ public class PaginaVirtual {
 		referenciar(false);
 		modificar(false);
 		presenca(false);
+		this.molduraPagina = null;
 		setContador(0);
 		setIndice(-1);
 	}
@@ -58,6 +59,11 @@ public class PaginaVirtual {
 	
 	public void setContador(int pContador) {
 		this.contador = pContador;
+	}
+	
+	public void setMolduraPagina(int pIndice, Integer pMolduraPagina){
+		this.indice = pIndice;
+		this.molduraPagina = pMolduraPagina;
 	}
 	
 	public int getContador() {

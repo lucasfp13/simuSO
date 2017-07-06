@@ -1,7 +1,7 @@
 package memoria;
 
 public class MemoriaVirtual {	
-	public PaginaVirtual[] memoriaVirtual;
+	private PaginaVirtual[] memoriaVirtual;
 	
 	public MemoriaVirtual(int pTamanho){
 		this.memoriaVirtual = new PaginaVirtual[pTamanho];
@@ -16,9 +16,5 @@ public class MemoriaVirtual {
 	
 	public int getTamanho(){
 		return memoriaVirtual.length;
-	}
-	
-	public void setMolduraPagina(int pIndice, int pMolduraPagina){
-
 	}
 }

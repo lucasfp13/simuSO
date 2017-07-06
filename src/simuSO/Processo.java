@@ -18,11 +18,13 @@ public class Processo implements Runnable {
 		
 		for (int i = 0; i < parts.length; i++) {
 			String parts2[] = parts[i].split("-");
-			if(parts2[1] == "W"){
-				mmu.escrever(Integer.parseInt(parts2[0]), parts2[1]);		// WRITE
+			String w = "W";
+			
+			if(parts2[1].equals(w)){
+				mmu.escrever(Integer.parseInt(parts2[0]));		// WRITE
 				System.out.println("Processo " + this.id + " escrevendo na memória");
 			} else {
-				mmu.ler(Integer.parseInt(parts2[0]), parts2[1]);		// READ
+				mmu.ler(Integer.parseInt(parts2[0]));		// READ
 				System.out.println("Processo " + this.id + " lendo da memória ");
 			}
 		}
