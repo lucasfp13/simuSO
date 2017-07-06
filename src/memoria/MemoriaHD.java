@@ -1,34 +1,51 @@
 package memoria;
 
-import java.io.File;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 
 public class MemoriaHD {
-	private File arquivo = new File("/hd.txt");
-	public MemoriaHD() {
+	private String local;
+	private int countNumeroLinhas = 0; // contador para saber se o indice não estrapolou o tamanho maximo da memoria do HD
+	private int tamanho = 0;
+	
+	public MemoriaHD(String local, int pTamanho) {
+		this.local = local;
+		this.tamanho = pTamanho;
 		try {
-			if (!arquivo.exists()) {
-				this.arquivo.createNewFile();
-			}
+			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(this.local));
+			buffWrite.close();
 		}catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
 		}
 	}
-	public void setText(String texto) {
+	
+	public void setValor(int pValor) {
 		try {
-			FileWriter fw = new FileWriter(arquivo, true);
-			BufferedWriter bw = new BufferedWriter(fw); 
-			bw.write(texto);
-			bw.newLine();
-			bw.close();
-			fw.close();
+			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(this.local, true));
+	        buffWrite.write(Integer.toString(pValor));
+	        buffWrite.newLine();
+	        buffWrite.close();
 		}catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
+		}
+		this.countNumeroLinhas+=1;
+	}
+	
+	public void getValor(int indice) {
+		try {
+			FileReader arq = new FileReader(this.local);
+		    BufferedReader lerArq = new BufferedReader(arq);
+		    String linha = lerArq.readLine();
+		      
+		    for (int i = 0; i < indice; i++) {
+		    	linha = lerArq.readLine();
+		    }
+		    System.out.println(linha);
+		    arq.close();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 }

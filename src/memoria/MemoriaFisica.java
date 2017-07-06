@@ -1,7 +1,7 @@
 package memoria;
 
 public class MemoriaFisica {	
-	private Integer indice;
+	private int indice;
 	private Integer[] memoriaFisica;
 	
 	public MemoriaFisica(int pTamanho) {
@@ -9,18 +9,18 @@ public class MemoriaFisica {
 	}
 	
 	public int getValor(int pIndice) {
-		return memoriaFisica[pIndice];
+		return memoriaFisica[pIndice].intValue();
 	}
 	
 	public void setValor(int pIndice, int pValor) {
-		this.memoriaFisica[pIndice] = pValor;
+		this.memoriaFisica[pIndice] = new Integer(pValor);
 	}
 	
 	public void setIndice(int pIndice) {
 		this.indice = pIndice;
 	}
 	
-	public Integer getIndice(){
+	public int getIndice(){
 		return this.indice;
 	}
 	

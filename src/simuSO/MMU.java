@@ -7,12 +7,14 @@ import clock.*;
 
 public class MMU implements Memoria, IClockListener {
     private int tempoAtual = 0;
-	private MemoriaVirtual memVirtual;
-    private MemoriaFisica memFisica;
+	private MemoriaVirtual memVirtual = null;
+    private MemoriaFisica memFisica = null;
+    private MemoriaHD memoriaHD = null;
     
-    public MMU(int pTamanhoMemoriaFisica, int pTamanhoMemoriaVirtual){
+    public MMU(int pTamanhoMemoriaFisica, int pTamanhoMemoriaVirtual, String pLocalMemoriaHD){
     	this.memFisica = new MemoriaFisica(pTamanhoMemoriaFisica);
     	this.memVirtual = new MemoriaVirtual(pTamanhoMemoriaVirtual);
+    	this.memoriaHD = new MemoriaHD(pLocalMemoriaHD, pTamanhoMemoriaVirtual);
     }
 
     @Override
@@ -48,19 +50,19 @@ public class MMU implements Memoria, IClockListener {
 	}
 
     @Override
-	public void ler(int pIndice) {
+	public void ler(int pIndice, int idProcesso) {
     	try {
 	    	if(this.memVirtual.getPagina(pIndice) == null) {
+	    		System.out.println("Pagina nula");
 	    		return;
 			} else {
 				boolean t = this.memVirtual.getPagina(pIndice).presente();
-				int pgFisica = this.memFisica.getValor(pIndice);
-				
+				int valorPaginaFisica = this.memFisica.getValor(pIndice);
 				if (t) {
-					System.out.println("valor -> " + pgFisica);
+					System.out.println("Processo " + idProcesso + " leu o valor ----> " + valorPaginaFisica);
 				}
 				else {
-					System.out.println("não tá na memoria fisica");
+					System.out.println("NÃO TÁ NA MEMÓRIA FÍSICA");
 				}
 			}	
     	}catch (Exception e) {
