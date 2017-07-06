@@ -36,6 +36,7 @@ public class MMU implements Memoria, IClockListener {
 				pagina.setMolduraPagina(pIndiceVirtual, indiceMemoriaFisica);
 	            pagina.modificar(true);
 	            pagina.referenciar(true);
+	            pagina.presenca(true);
 	            this.memFisica.setValor(indiceMemoriaFisica, valor);
 	            System.out.println("Processo " + idProcesso + " escreveu valor " + valor + " no indice " + indiceMemoriaFisica + " da memoria fisica e"
 	            		+ " escreveu " + indiceMemoriaFisica + " no indice " + pagina.getIndice() + " da memoria virtual!");
@@ -51,18 +52,22 @@ public class MMU implements Memoria, IClockListener {
 
     @Override
 	public void ler(int pIndice, int idProcesso) {
+    	
     	try {
 	    	if(this.memVirtual.getPagina(pIndice) == null) {
 	    		System.out.println("Pagina nula");
 	    		return;
 			} else {
 				boolean t = this.memVirtual.getPagina(pIndice).presente();
-				int valorPaginaFisica = this.memFisica.getValor(pIndice);
+				Integer valorMoldPagina = this.memFisica.getValor(pIndice);
+				
 				if (t) {
-					System.out.println("Processo " + idProcesso + " leu o valor ----> " + valorPaginaFisica);
-				}
-				else {
-					System.out.println("NÃO TÁ NA MEMÓRIA FÍSICA");
+					System.out.println("Processo " + idProcesso + " leu o valor ----> " + valorMoldPagina);
+				} else {
+					System.out.println("BUSCANDO NO HD");
+					int valor = memoriaHD.getValor(pIndice);		
+					System.out.println(valor);
+					
 				}
 			}	
     	}catch (Exception e) {

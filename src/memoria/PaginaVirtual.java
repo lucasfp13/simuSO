@@ -6,14 +6,14 @@ public class PaginaVirtual {
 	private boolean presente;
 	private Integer molduraPagina;
 	private int indice;
-	private int contador;
+	private int tempoVirtualAtual;
 	
 	public PaginaVirtual() {
 		referenciar(false);
 		modificar(false);
 		presenca(false);
 		this.molduraPagina = null;
-		setContador(0);
+		setTempoVirtualAtual(0);
 		setIndice(-1);
 	}
 	
@@ -21,7 +21,7 @@ public class PaginaVirtual {
 		referenciar(pReferenciada);
 		modificar(pModificada);
 		presenca(pPresente);
-		setContador(0);
+		setTempoVirtualAtual(0);
 		setIndice(pIndice);
 	}
 	
@@ -57,8 +57,8 @@ public class PaginaVirtual {
 		return this.indice;
 	}
 	
-	public void setContador(int pContador) {
-		this.contador = pContador;
+	public void setTempoVirtualAtual(int pTempo) {
+		this.tempoVirtualAtual = pTempo;
 	}
 	
 	public void setMolduraPagina(int pIndice, Integer pMolduraPagina){
@@ -66,7 +66,7 @@ public class PaginaVirtual {
 		this.molduraPagina = pMolduraPagina;
 	}
 	
-	public int getContador() {
-		return this.contador;
+	public int getTempoVirtualAtual() {
+		return this.tempoVirtualAtual;
 	}	
 }

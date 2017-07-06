@@ -8,8 +8,8 @@ public class MemoriaFisica {
 		memoriaFisica = new Integer[pTamanho];
 	}
 	
-	public int getValor(int pIndice) {
-		return memoriaFisica[pIndice].intValue();
+	public Integer getValor(int pIndice) {
+		return memoriaFisica[pIndice];
 	}
 	
 	public void setValor(int pIndice, int pValor) {

@@ -21,18 +21,20 @@ public class Processo implements Runnable {
 			String w = "W";
 			
 			if(parts2[1].equals(w)){
-				System.out.println("Processo " + this.id + " escrevendo na memória");
+				//System.out.println("Processo " + this.id + " escrevendo na memória");
 				mmu.escrever(Integer.parseInt(parts2[0]), this.id);		// WRITE
 			} else {
-				System.out.println("Processo " + this.id + " lendo da memória ");
+				System.out.println("Processo " + this.id + " lendo indice " + Integer.parseInt(parts2[0]) + " da memória virtual");
 				mmu.ler(Integer.parseInt(parts2[0]), this.id);		// READ
 			}
-		}
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
