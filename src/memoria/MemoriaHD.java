@@ -15,15 +15,20 @@ public class MemoriaHD {
 		this.local = local;
 		//this.tamanho = pTamanho;
 		try {
-			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(this.local));
-			Random r = new Random();
-		
-			for(int i = 0; i < pTamanho; i++){
-				Integer seed = r.nextInt(100);
-				this.setValor(seed);
-			}
 			
-			buffWrite.close();
+			if(this.local != null){
+				return;
+			} else {
+				BufferedWriter buffWrite = new BufferedWriter(new FileWriter(this.local));
+				Random r = new Random();
+			
+				for(int i = 0; i < pTamanho; i++){
+					Integer seed = r.nextInt(100);
+					this.setValor(seed);
+				}
+				
+				buffWrite.close();
+			}
 		}catch (Exception e) {
 			System.out.println(e);
 		}
@@ -53,7 +58,6 @@ public class MemoriaHD {
 		    	linha = lerArq.readLine();
 		    }
 		    valor = Integer.parseInt(linha);
-		    //System.out.println(linha);
 		    arq.close();
 		} catch (Exception e) {
 			System.out.println(e);

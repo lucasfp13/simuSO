@@ -59,9 +59,9 @@ public class MMU implements Memoria, IClockListener {
 	    		return;
 			} else {
 				boolean t = this.memVirtual.getPagina(pIndice).presente();
-				Integer valorMoldPagina = this.memFisica.getValor(pIndice);
 				
 				if (t) {
+					Integer valorMoldPagina = this.memFisica.getValor(pIndice);
 					System.out.println("Processo " + idProcesso + " leu o valor ----> " + valorMoldPagina);
 				} else {
 					System.out.println("BUSCANDO NO HD");
