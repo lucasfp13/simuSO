@@ -16,7 +16,7 @@ public class MMU implements Memoria, IClockListener {
     }
 
     @Override
-	public void escrever(int pIndiceVirtual) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
+	public void escrever(int pIndiceVirtual, int idProcesso) { // Aplicar o algoritmo WS nesse método pra saber quem vai sair ou ser substituido
     	
 		boolean testePresenca = this.memVirtual.getPagina(pIndiceVirtual).presente();
 		
@@ -29,12 +29,14 @@ public class MMU implements Memoria, IClockListener {
 			if(indiceMemoriaFisica == null){
 				System.out.println("NAO TEM MAIS ESPAÇO NA MEM FISICA");
 				System.out.println("CHAMA O ALGORITMO WS");
+				
 			} else {
 				pagina.setMolduraPagina(pIndiceVirtual, indiceMemoriaFisica);
 	            pagina.modificar(true);
 	            pagina.referenciar(true);
 	            this.memFisica.setValor(indiceMemoriaFisica, valor);
-	            System.out.println("Escreveu valor " + valor + " no indice " + indiceMemoriaFisica + " da memoria fisica!");
+	            System.out.println("Processo " + idProcesso + " escreveu valor " + valor + " no indice " + indiceMemoriaFisica + " da memoria fisica e"
+	            		+ " escreveu " + indiceMemoriaFisica + " no indice " + pagina.getIndice() + " da memoria virtual!");
 			}			
 			
 		} else {
@@ -77,7 +79,7 @@ public class MMU implements Memoria, IClockListener {
     
     // Para zerar os bits de referenciado das páginas virtuais
     public void eventoZerarRecebido(int tempoClock){
-    	for(int i = 0; i < memVirtual.getTamanho(); ++i){
+    	for(int i = 0; i < memVirtual.getTamanho(); i++){
     		memVirtual.getPagina(i).referenciar(false);
     	}
     	

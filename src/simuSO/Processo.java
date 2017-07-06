@@ -21,7 +21,7 @@ public class Processo implements Runnable {
 			String w = "W";
 			
 			if(parts2[1].equals(w)){
-				mmu.escrever(Integer.parseInt(parts2[0]));		// WRITE
+				mmu.escrever(Integer.parseInt(parts2[0]), this.id);		// WRITE
 				System.out.println("Processo " + this.id + " escrevendo na memória");
 			} else {
 				mmu.ler(Integer.parseInt(parts2[0]));		// READ
