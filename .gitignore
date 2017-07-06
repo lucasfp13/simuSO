@@ -1,0 +1,29 @@
+
+# Created by https://www.gitignore.io/api/java,eclipse,windows
+
+### Eclipse ###
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+### Eclipse Patch ###
+# Eclipse Core		
+.project
+
+### Java ###
+# Compiled class file
+*.class
+
+# TXT files
+*.txt
+
+# End of https://www.gitignore.io/api/java,eclipse,windows
