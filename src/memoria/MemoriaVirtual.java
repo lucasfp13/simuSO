@@ -10,6 +10,10 @@ public class MemoriaVirtual {
 		}
 	}
 	
+	public void setPagina(PaginaVirtual pPagina, int pIndiceVirtual){
+		this.memoriaVirtual[pIndiceVirtual] = pPagina;
+	}
+	
 	public PaginaVirtual getPagina(int pIndice){
 		return memoriaVirtual[pIndice];
 	}
