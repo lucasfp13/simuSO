@@ -29,7 +29,7 @@ public class MemoriaHD {
 				
 				buffWrite.close();
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
