@@ -8,7 +8,7 @@ public class SO {
 	public static final Clock CLOCK = new Clock();
 	public static final int TAMANHO_MEMORIA_FISICA = 8;
 	public static final int TAMANHO_MEMORIA_VIRTUAL = 16;
-	public static final String localHD = "MEMORIA_HD.txt";
+	public static final String localHD = "C:\\Users\\Public\\MEMORIA_HD.txt";
 	public static final MMU mmu = new MMU(TAMANHO_MEMORIA_FISICA, TAMANHO_MEMORIA_VIRTUAL, localHD);
 	public static final FabricaDeEntradas fab1 = new FabricaDeEntradas(TAMANHO_MEMORIA_VIRTUAL);
 	//public static final FabricaDeEntradas fab2 = new FabricaDeEntradas(TAMANHO_MEMORIA_VIRTUAL);

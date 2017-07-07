@@ -5,7 +5,7 @@ import simuSO.*;
 public class Clock implements Runnable {
 	private int tempo;
 	private boolean rodando;
-	private static int TIMESTEMP = 100;
+	private static final int TIMESTEMP = 100;
 	private Dispatcher dispatcher;
 	
 	public Clock() {
@@ -18,7 +18,6 @@ public class Clock implements Runnable {
 			try {
 				this.tempo++;
 				Thread.sleep(TIMESTEMP);
-				
 				this.tempo += TIMESTEMP;
 				dispatcher.notificaListener(tempo);
 			} catch (InterruptedException e) {

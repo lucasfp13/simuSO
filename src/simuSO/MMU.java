@@ -10,6 +10,7 @@ public class MMU implements Memoria, IClockListener {
 	private MemoriaVirtual memVirtual = null;
     private MemoriaFisica memFisica = null;
     private MemoriaHD memoriaHD = null;
+    private static final int TEMPO_PAGINA = 1000;
     
     public MMU(int pTamanhoMemoriaFisica, int pTamanhoMemoriaVirtual, String pLocalMemoriaHD){
     	this.memFisica = new MemoriaFisica(pTamanhoMemoriaFisica);
@@ -31,6 +32,7 @@ public class MMU implements Memoria, IClockListener {
 			if(indiceMemoriaFisica == null){
 				System.out.println("NAO TEM MAIS ESPAÇO NA MEM FISICA");
 				System.out.println("CHAMA O ALGORITMO WS");
+				this.WS(this.memVirtual.getPagina(pIndiceVirtual));
 				
 			} else {
 				pagina.setIndice(pIndiceVirtual);
@@ -97,9 +99,9 @@ public class MMU implements Memoria, IClockListener {
 					Integer valorMoldPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
 					System.out.println("Processo " + IDProcesso + " leu o valor ----> " + this.memFisica.getValor(valorMoldPagina));
 				} else {
-					System.out.println("AUSENCIA DE PAGINA NA MEMFISICA!");
-					
-					//WS();
+					System.out.println("AUSENCIA DE PAGINA NA MEMORIA FISICA!");
+					System.out.println("-- CHAMOU WS --");
+					this.WS(this.memVirtual.getPagina(pIndiceVirtual));
 					//int valor = this.memoriaHD.getValorHD(pIndiceVirtual);		
 					//System.out.println(valor);
 					
@@ -110,8 +112,12 @@ public class MMU implements Memoria, IClockListener {
 		}
 	}   
     
-    public void WS(){
-    	
+    private void WS(PaginaVirtual pPaginaVirtual) {
+    	int tempoAtualDaPagina = pPaginaVirtual.getTempoVirtualAtual(); // gravando o tempo atual da página verificada
+    	for(int countPaginas = 0; countPaginas < this.memVirtual.getTamanho(); countPaginas++) {
+    		int tempoPaginaLoop = this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual();
+    		System.out.println("tempo pagina atual -> " + tempoAtualDaPagina + "\ntempo pagina loop -> " + tempoPaginaLoop);
+    	}
     }
     
     public Integer getIndiceMemFisica(Integer[] memFisica) {
@@ -128,7 +134,6 @@ public class MMU implements Memoria, IClockListener {
     	for(int i = 0; i < this.memVirtual.getTamanho(); i++){
     		this.memVirtual.getPagina(i).referenciar(false);
     	}
-    	
     	this.tempoAtual = tempoClock;
     }    
 }
