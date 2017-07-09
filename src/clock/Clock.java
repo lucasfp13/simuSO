@@ -3,35 +3,25 @@ package clock;
 import simuSO.*;
 
 public class Clock implements Runnable {
-	private int tempo;
-	private boolean rodando;
-	private static final int TIMESTEMP = 100;
-	private Dispatcher dispatcher;
+	private int tempo = 0;
+	private int timeStemp;
+	private Dispatcher dispatcher = new Dispatcher();
 	
-	public Clock() {
-		this.tempo = 0;
-		this.rodando = false;
+	public Clock(int pTimeStemp) {
+		this.timeStemp = pTimeStemp;
 	}
 
 	public void run() {
-		while(this.rodando) {
+		while(true) {
 			try {
-				this.tempo++;
-				Thread.sleep(TIMESTEMP);
-				this.tempo += TIMESTEMP;
-				dispatcher.notificaListener(tempo);
+				Thread.sleep(timeStemp);		
+				this.tempo += timeStemp;
+				this.dispatcher.notificaListener(this.tempo);
+				System.out.println("TEMPO CLOCK " + this.tempo);
 			} catch (InterruptedException e) {
 				System.out.println(e);
 			}
 		}
-	}
-
-	public void iniciar() {
-		this.rodando = true;
-	}
-
-	public void parar() {
-		this.rodando = false;
 	}
 
 	public void adicionaListener(IClockListener icl){

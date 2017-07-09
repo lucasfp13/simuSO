@@ -11,6 +11,8 @@ public class Dispatcher {
 	}
 	
 	public void notificaListener(int tempoClock){
-		listeners.get(0).eventoZerarRecebido(tempoClock);
+		for(IClockListener icl : listeners){
+			icl.eventoZerarRecebido(tempoClock);
+		}
 	}
 }

@@ -27,4 +27,13 @@ public class MemoriaFisica {
 	public Integer[] getMemoria() {
 		return this.memoriaFisica;
 	}
+	
+	public Integer getIndiceLivre(Integer[] memFisica) {
+		for(int i = 0; i < memFisica.length; i++){
+			if(memFisica[i] == null){
+				return i;
+			}
+		}
+		return null;
+	}
 }

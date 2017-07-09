@@ -19,6 +19,15 @@ public class PaginaVirtual {
 		setIndice(-1);
 	}
 	
+	public void descartarPagina(){
+		this.referenciar(false);
+		this.modificar(false);
+		this.presenca(false);
+		this.setMolduraPagina(null);
+		this.setValor(null);
+		this.setTempoVirtualAtual(0);
+	}
+	
 	public void referenciar(boolean bit) {
 		this.referenciada = bit;
 	}
