@@ -51,10 +51,6 @@ public class PaginaVirtual {
 		return this.indice;
 	}
 	
-	public void setTempoVirtualAtual(int pTempo) {
-		this.tempoVirtualAtual = pTempo;
-	}
-	
 	public void setMolduraPagina(Integer pMolduraPagina){
 		this.molduraPagina = pMolduraPagina;
 	}
@@ -69,6 +65,10 @@ public class PaginaVirtual {
 	
 	public Integer getValor(){
 		return this.valor;
+	}
+	
+	public void setTempoVirtualAtual(int pTempo) {
+		this.tempoVirtualAtual = pTempo;
 	}
 	
 	public int getTempoVirtualAtual() {

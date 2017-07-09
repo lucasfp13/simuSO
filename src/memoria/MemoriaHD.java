@@ -40,6 +40,8 @@ public class MemoriaHD {
 			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(this.local, true));
 	        buffWrite.write(Integer.toString(pValor));
 	        buffWrite.newLine();
+	        	
+	        
 	        buffWrite.close();
 	        //this.countNumeroLinhas++;
 		}catch (Exception e) {
@@ -64,5 +66,32 @@ public class MemoriaHD {
 			System.out.println(e);
 		}
 		return valor;
+	}
+	
+	public void swap(Integer pValor, Integer pIndice) {
+		try {
+			Integer valor2Swap = new Integer(pValor);
+			
+			// Variáveis para escrita
+			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(this.local, true));	  
+	        
+	        // Variáveis para leitura
+			FileReader arq = new FileReader(this.local);
+		    BufferedReader lerArq = new BufferedReader(arq);
+		    String linha = lerArq.readLine();
+	        
+		    // Swap
+		    String[] arqLinha = linha.split(" ");
+		    
+	        arqLinha[pIndice] = valor2Swap.toString();
+	        for(int x = 0; pIndice < arqLinha.length; pIndice++){
+	        	buffWrite.write(arqLinha[pIndice]);
+	        }
+	        
+	        buffWrite.close();
+	        lerArq.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }
