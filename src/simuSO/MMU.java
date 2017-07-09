@@ -11,15 +11,15 @@ public class MMU implements Memoria, IClockListener {
     private MemoriaFisica memFisica = null;
     private MemoriaHD memoriaHD = null;
     
-    public MMU(int pTamanhoMemoriaFisica, int pTamanhoMemoriaVirtual, String pLocalMemoriaHD){
-    	this.memFisica = new MemoriaFisica(pTamanhoMemoriaFisica);
-    	this.memVirtual = new MemoriaVirtual(pTamanhoMemoriaVirtual);
-    	this.memoriaHD = new MemoriaHD(pLocalMemoriaHD, pTamanhoMemoriaVirtual);
+    public MMU(int pTamanhoMemoriaFisica, int pTamanhoMemoriaVirtual, MemoriaVirtual pMemoriaVirtual, MemoriaFisica pMemoriaFisica, MemoriaHD pMemoriaHD){
+    	this.memFisica = pMemoriaFisica;
+    	this.memVirtual = pMemoriaVirtual;
+    	this.memoriaHD = pMemoriaHD;
     }
 
     @Override
 	public void escrever(int pIndiceVirtual, int idProcesso) {
-    	
+    	System.out.println("PROCESSO " + idProcesso + " ESCREVENDO NO INDICE " + pIndiceVirtual);
 		boolean testePresenca = this.memVirtual.getPagina(pIndiceVirtual).presente();
 		
 		if (testePresenca == false) {
@@ -64,17 +64,16 @@ public class MMU implements Memoria, IClockListener {
 
     @Override
 	public void ler(int pIndiceVirtual, int IDProcesso) {
-    	
+    	System.out.println("PROCESSO " + IDProcesso + " LENDO NO INDICE " + pIndiceVirtual);
     	try {
 	    	if(this.memVirtual.getPagina(pIndiceVirtual).getValor() == null) {
 	    		System.out.println("Falta de pagina!");
-	    		System.out.println("#partiu buscar no HD...");
-	
 	    		PaginaVirtual paginaNova = new PaginaVirtual();
 	 
 	    		Integer indiceMF = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
 	    		// Se a moldura estiver livre
 	    		if(indiceMF != null){
+	    			System.out.println("#partiu buscar no HD...");
 	    			paginaNova.referenciar(true);
 	    			paginaNova.modificar(false);
 	    			paginaNova.presenca(true);
@@ -89,7 +88,6 @@ public class MMU implements Memoria, IClockListener {
 	    			
 	    			// Escreve valor da pagina na memoria fisica
 	    			this.memFisica.setValor(indiceMF, valorDoHD);
-	    			
 	    			
 	    			//System.out.println("Pagina agora referenciada na memoria fisica!");
 	    			System.out.println("Valor na memoria virtual: " + this.memVirtual.getPagina(pIndiceVirtual).getValor());
@@ -120,7 +118,7 @@ public class MMU implements Memoria, IClockListener {
 	}   
     
     private void WS() {
-    	int t = 50;
+    	int t = 500;
     	boolean marcada = false;	// marca pagina candidata a ser retirada da memFisica
     	int idadePaginaAtual = 0;
     	int valorPagina = 0;

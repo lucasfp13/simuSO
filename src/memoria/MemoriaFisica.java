@@ -3,8 +3,10 @@ package memoria;
 public class MemoriaFisica {	
 	//private int indice;
 	private Integer[] memoriaFisica;
+	private int tamanho = 0;
 	
 	public MemoriaFisica(int pTamanho) {
+		this.tamanho = pTamanho;
 		memoriaFisica = new Integer[pTamanho];
 	}
 	
@@ -14,6 +16,10 @@ public class MemoriaFisica {
 	
 	public void setValor(int pIndice, int pValor) {
 		this.memoriaFisica[pIndice] = new Integer(pValor);
+	}
+	
+	public int getTamanho() {
+		return this.tamanho;
 	}
 	
 	/*public void setIndice(int pIndice) {

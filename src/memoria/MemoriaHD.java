@@ -10,11 +10,11 @@ import java.util.Random;
 public class MemoriaHD {
 	private String local;
 	//private int countNumeroLinhas = 0; // contador para saber se o indice não estrapolou o tamanho maximo da memoria do HD
-	//private int tamanho = 0;
+	private int tamanho = 0;
 	
 	public MemoriaHD(String local, int pTamanho) {
 		this.local = local;
-		//this.tamanho = pTamanho;
+		this.tamanho = pTamanho;
 		try {
 			FileReader file = new FileReader(this.local);
 			if(file.ready()){
@@ -93,5 +93,9 @@ public class MemoriaHD {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+	
+	public int getTamanho() {
+		return this.tamanho;
 	}
 }
