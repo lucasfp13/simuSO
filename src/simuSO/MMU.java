@@ -34,6 +34,7 @@ public class MMU implements Memoria, IClockListener {
 				System.out.println("CHAMA O ALGORITMO WS");
 				
 				if(this.memVirtual.getPagina(pIndiceVirtual).modificada() == true){
+					System.out.println("kjsdnkjnkdnlaksjdnklasnlaskdndlas");
 					Integer moldPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
 					Integer valorModificado = this.memFisica.getValor(moldPagina);
 					this.memoriaHD.swap(valorModificado, pIndiceVirtual);

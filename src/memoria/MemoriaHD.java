@@ -57,7 +57,7 @@ public class MemoriaHD {
 		    BufferedReader lerArq = new BufferedReader(arq);
 		    String linha = lerArq.readLine();
 		    
-		    for(int i = 0; i < indice; i++) {
+		    for(int i = 0; i < indice-1; i++) {
 		    	linha = lerArq.readLine();
 		    }
 		    valor = Integer.parseInt(linha);
@@ -70,23 +70,35 @@ public class MemoriaHD {
 	
 	public void swap(Integer pValor, Integer pIndice) {
 		try {
-			Integer valor2Swap = new Integer(pValor);
-			
-			// Variáveis para escrita
-			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(this.local, true));	  
+			Integer valor2Swap = new Integer(pValor);	  
 	        
 	        // Variáveis para leitura
 			FileReader arq = new FileReader(this.local);
 		    BufferedReader lerArq = new BufferedReader(arq);
 		    String linha = lerArq.readLine();
-	        
-		    // Swap
-		    String[] arqLinha = linha.split(" ");
 		    
-	        arqLinha[pIndice] = valor2Swap.toString();
-	        for(int x = 0; pIndice < arqLinha.length; pIndice++){
-	        	buffWrite.write(arqLinha[pIndice]);
-	        }
+		    // Variáveis para escrita
+		 	BufferedWriter buffWrite = null;
+		 	
+		 	String []linhasSplite = new String[tamanho];
+		 	int a = 0;
+		 	while (linha != null) {
+		 		linhasSplite[a] = linha.toString();
+		 		linha = lerArq.readLine();
+		 		++a;
+		 	}
+		 	
+		 	for (int i = 0; i < linhasSplite.length; i++) {
+				System.out.println(i + "->" + linhasSplite[i]);
+			}
+		 	
+		 	linhasSplite[pIndice] = pValor.toString();
+		 	
+		 	buffWrite = new BufferedWriter(new FileWriter(this.local));
+		 	
+		 	for(int i = 0; i < tamanho; i++){
+				this.setValorHD(Integer.parseInt(linhasSplite[i]));
+			}
 	        
 	        buffWrite.close();
 	        lerArq.close();

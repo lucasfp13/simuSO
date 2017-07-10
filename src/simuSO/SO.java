@@ -11,7 +11,7 @@ public class SO {
 	public static final Clock CLOCK = new Clock(1000);
 	public static final int TAMANHO_MEMORIA_FISICA = 8;
 	public static final int TAMANHO_MEMORIA_VIRTUAL = 16;
-	public static final String LOCAL_HD = "MEMORIA_HD.txt";
+	public static final String LOCAL_HD = "C:\\Users\\dayvi\\Desktop\\SO\\MEMORIA_HD.txt";
 	public static MemoriaFisica memFisica = new MemoriaFisica(TAMANHO_MEMORIA_FISICA);
 	public static MemoriaVirtual memVirtual = new MemoriaVirtual(TAMANHO_MEMORIA_VIRTUAL);
 	public static MemoriaHD memoriaHD = new MemoriaHD(LOCAL_HD, TAMANHO_MEMORIA_VIRTUAL);
@@ -21,7 +21,7 @@ public class SO {
 	
 	public static void main(String[] args) {
 		
-		String inputProcesso1 = fab1.getNewEntrada(); 
+		String inputProcesso1 = fab1.getNewEntrada();
 		System.out.println("fab1 = " + inputProcesso1);
 	//	String inputProcesso2 = fab2.getNewEntrada(); 
 	//	System.out.println("fab2 = " + inputProcesso2);
