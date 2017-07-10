@@ -69,7 +69,7 @@ public class TelaLog extends JFrame {
 				String memHD = "";
 				
 				for (int i = 0; i < pMemoriaVirtual.getTamanho(); i++) {
-    	    		memVirtual += pMemoriaVirtual.getPagina(i).getValor() + " - ";
+    	    		memVirtual += pMemoriaVirtual.getPagina(i).presente() + " presente - ";
     	    	}
     	    	
     	    	for (int i = 0; i < pMemoriaFisica.getTamanho(); i++) {

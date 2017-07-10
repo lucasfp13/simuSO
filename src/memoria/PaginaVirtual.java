@@ -5,7 +5,7 @@ public class PaginaVirtual {
 	private boolean modificada;
 	private boolean presente;
 	private Integer molduraPagina;
-	private Integer valor;
+	//private Integer valor;
 	private int indice;
 	private int tempoVirtualAtual;
 	
@@ -14,7 +14,7 @@ public class PaginaVirtual {
 		modificar(false);
 		presenca(false);
 		setMolduraPagina(null);
-		setValor(null);
+		//setValor(null);
 		setTempoVirtualAtual(0);
 		setIndice(-1);
 	}
@@ -24,7 +24,7 @@ public class PaginaVirtual {
 		this.modificar(false);
 		this.presenca(false);
 		this.setMolduraPagina(null);
-		this.setValor(null);
+		//this.setValor(null);
 		this.setTempoVirtualAtual(0);
 	}
 	
@@ -68,13 +68,13 @@ public class PaginaVirtual {
 		return this.molduraPagina;
 	}
 	
-	public void setValor(Integer pValor){
+	/*public void setValor(Integer pValor){
 		this.valor = pValor;
 	}
 	
 	public Integer getValor(){
 		return this.valor;
-	}
+	}*/
 	
 	public void setTempoVirtualAtual(int pTempo) {
 		this.tempoVirtualAtual = pTempo;

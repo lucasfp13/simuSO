@@ -20,11 +20,11 @@ public class Log implements Runnable { // Quando criar o front eu coloco a Runna
     public void run() { // No lugar desses prints colocar um return pra passar ao front os dados
     	while(true){
     		try {
-    			Thread.sleep(6000);
+    			Thread.sleep(8000);
     			System.out.println("**************************");
     			System.out.println("Valores memória virtual: ");
     	    	for (int i = 0; i < this.memVirtual.getTamanho(); i++) {
-    	    		System.out.println(" - " + this.memVirtual.getPagina(i).getValor());
+    	    		System.out.println(" TEMPO- " + this.memVirtual.getPagina(i).getTempoVirtualAtual());
     	    	}
     	    	
     	    	System.out.println("**************************");

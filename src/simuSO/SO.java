@@ -17,9 +17,9 @@ public class SO extends JFrame {
 	
 	private JPanel contentPane;
 	public static final Clock CLOCK = new Clock(1000);
-	public static final int TAMANHO_MEMORIA_FISICA = 4;
-	public static final int TAMANHO_MEMORIA_VIRTUAL = 8;
-	public static final String LOCAL_HD = "C:\\Users\\dayvi\\Desktop\\SO\\MEMORIA_HD.txt";
+	public static final int TAMANHO_MEMORIA_FISICA = 2;
+	public static final int TAMANHO_MEMORIA_VIRTUAL = 4;
+	public static final String LOCAL_HD = "MEMORIA_HD.txt";
 	public static MemoriaFisica memFisica = new MemoriaFisica(TAMANHO_MEMORIA_FISICA);
 	public static MemoriaVirtual memVirtual = new MemoriaVirtual(TAMANHO_MEMORIA_VIRTUAL);
 	public static MemoriaHD memoriaHD = new MemoriaHD(LOCAL_HD, TAMANHO_MEMORIA_VIRTUAL);
@@ -34,7 +34,7 @@ public class SO extends JFrame {
 	//	String inputProcesso2 = fab2.getNewEntrada(); 
 	//	System.out.println("fab2 = " + inputProcesso2);
 		
-		String input1 = "2-R,3-R,0-W,1-W,4-R,3-R,2-R,2-W,3-R,2-R";
+		String input1 = "2-R,3-R,0-W,1-W";//,4-R,3-R,2-R,2-W,3-R,2-R";
 		
 		CLOCK.adicionaListener(mmu);
 		

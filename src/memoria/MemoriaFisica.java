@@ -15,7 +15,7 @@ public class MemoriaFisica {
 	}
 	
 	public void setValor(int pIndice, Integer pValor) {
-		this.memoriaFisica[pIndice] = new Integer(pValor);
+		this.memoriaFisica[pIndice] = pValor;
 	}
 	
 	public int getTamanho() {
