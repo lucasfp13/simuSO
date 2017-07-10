@@ -17,7 +17,7 @@ public class Clock implements Runnable {
 				Thread.sleep(timeStemp);		
 				this.tempo += timeStemp;
 				this.dispatcher.notificaListener(this.tempo);
-				System.out.println("TEMPO CLOCK " + this.tempo);
+				//System.out.println("TEMPO CLOCK " + this.tempo);
 			} catch (InterruptedException e) {
 				System.out.println(e);
 			}

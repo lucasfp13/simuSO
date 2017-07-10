@@ -5,8 +5,8 @@ import java.util.Random;
 
 
 public class FabricaDeEntradas {
-	public static final int QTD_ACESSO_ENTRADA = 200;
-	public static final int TAMANHO_MEMORIA = 8;
+	public static final int QTD_ACESSO_ENTRADA = 32;
+	public static final int TAMANHO_MEMORIA = 16;
 	private int tamanhoMemoriaVirtual = 0;
 	private int seed;
 	

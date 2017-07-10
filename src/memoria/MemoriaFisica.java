@@ -14,7 +14,7 @@ public class MemoriaFisica {
 		return memoriaFisica[pIndice];
 	}
 	
-	public void setValor(int pIndice, int pValor) {
+	public void setValor(int pIndice, Integer pValor) {
 		this.memoriaFisica[pIndice] = new Integer(pValor);
 	}
 	
