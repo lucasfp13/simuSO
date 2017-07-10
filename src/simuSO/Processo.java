@@ -25,7 +25,8 @@ public class Processo implements Runnable {
 				mmu.escrever(Integer.parseInt(parts2[0]), this.id);		// WRITE
 			} else {
 				//System.out.println("Processo " + this.id + " lendo indice " + Integer.parseInt(parts2[0]) + " da memória virtual");
-				mmu.ler(Integer.parseInt(parts2[0]), this.id);		// READ
+				Integer valorLeitura = mmu.ler(Integer.parseInt(parts2[0]), this.id);		// READ
+				System.out.println("Valor lido: " + valorLeitura);
 			}
 			
 			try {
