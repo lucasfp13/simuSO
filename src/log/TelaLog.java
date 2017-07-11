@@ -141,7 +141,7 @@ public class TelaLog extends JFrame {
 				}
 				
 				for (int i = 0; i < pMemoriaVirtual.getTamanho(); i++) {
-					Integer indice = pMemoriaVirtual.getPagina(i).getIndice();
+					Integer indice = pMemoriaVirtual.getPagina(i).getMolduraPagina();
 					boolean modificada = pMemoriaVirtual.getPagina(i).modificada();
 					boolean referenciada = pMemoriaVirtual.getPagina(i).referenciada();
 					boolean presenteAusente = pMemoriaVirtual.getPagina(i).presente();

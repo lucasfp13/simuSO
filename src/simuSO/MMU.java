@@ -19,7 +19,7 @@ public class MMU implements Memoria, IClockListener {
 
     @Override
 	public void escrever(int pIndiceVirtual, int idProcesso) {
-    	
+    	Integer molduraPagina;
     	// Se o valor da pagina NÃO está presente na memória fisica
     	if (this.memVirtual.getPagina(pIndiceVirtual).presente() == false) {
     		Integer indiceLivre = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
@@ -70,13 +70,23 @@ public class MMU implements Memoria, IClockListener {
 			}			
 			
     	//	Se o valor da pagina está presente na memória fisica	
-		} else {			
+		} else {	
+			
+			molduraPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
+			
+			if(this.memVirtual.getPagina(pIndiceVirtual).modificada() == true){
+				Integer valorModificado = this.memFisica.getValor(molduraPagina);
+				this.memoriaHD.swap(valorModificado, pIndiceVirtual);
+			}
+			
 			Random r = new Random();		
-			Integer novoValor = r.nextInt(100);			// Gerando um valor aleatório, já que não importa para o nosso caso
-			Integer molduraPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
+			Integer novoValor = r.nextInt(100);	// Gerando um valor aleatório, já que não importa para o nosso caso
+			System.out.println("Escrevendo valor " + novoValor + " na memória física");
+			
 			this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
 			this.memVirtual.getPagina(pIndiceVirtual).modificar(true);
 			this.memFisica.setValor(molduraPagina, novoValor);
+			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(molduraPagina);
 			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
 		}
 	}
@@ -97,7 +107,6 @@ public class MMU implements Memoria, IClockListener {
 	    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
 	    			valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
 	    			this.memFisica.setValor(indiceMF, valorDoHD);
-//	    			return valorDoHD;
 	    		} else {
 	    			
 	    			// Verifica o bit M
@@ -114,7 +123,6 @@ public class MMU implements Memoria, IClockListener {
 		    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
 		    			valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
 		    			this.memFisica.setValor(moldPagina, valorDoHD);
-//		    			return valorDoHD;
 						
 					} else {
 						Integer molduraPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
@@ -127,12 +135,12 @@ public class MMU implements Memoria, IClockListener {
 		    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
 		    			valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
 		    			this.memFisica.setValor(molduraPagina, valorDoHD);
-//		    			return valorDoHD;
 					}
 	    		}
 	    		
 			} else {
-	    		this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
+	    		this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
+				this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
 	   			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
 	   			valorDoHD = this.memFisica.getValor(this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina());				
 			}
@@ -168,8 +176,8 @@ public class MMU implements Memoria, IClockListener {
     			if(idadePaginaAtual >= idadePaginaTemp){
     				iTemp = countPaginas;
     				marcada = true;
-    				continue;
     			}
+    			continue;
     		}
     		
     		if(this.memVirtual.getPagina(countPaginas).referenciada() == false && (this.tempoAtual - this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual()) > t){
@@ -194,8 +202,8 @@ public class MMU implements Memoria, IClockListener {
     			if(idadePaginaAtual >= idadePaginaTemp){
     				iTemp = countPaginas;
     				marcada = true;
-    				continue;
     			}
+    			continue;
     		}
     		
     		if(marcada == true){
