@@ -70,12 +70,11 @@ public class MemoriaHD {
 	
 	public void swap(Integer pValor, Integer pIndice) {
 		try {	        
-	        // Variáveis para leitura
+
 			FileReader arq = new FileReader(this.local);
 		    BufferedReader lerArq = new BufferedReader(arq);
 		    String linha = lerArq.readLine();
-		    
-		    // Variáveis para escrita
+		   
 		 	BufferedWriter buffWrite = null;
 		 	
 		 	String []linhasSplite = new String[this.tamanho];

@@ -14,7 +14,6 @@ public class FabricaDeEntradas {
 		this.tamanhoMemoriaVirtual = tamanhoMemoria;
 		Random r = new Random();
 		this.seed = r.nextInt(tamanhoMemoria);
-		//System.out.println("Semente = " + seed);
 		if(tamanhoMemoria < TAMANHO_MEMORIA) {
 			throw new IllegalArgumentException("Memória muito pequena - valor mínimo 32");
 		}
@@ -37,16 +36,13 @@ public class FabricaDeEntradas {
 		StringBuffer sb = new StringBuffer();
 		int loop1 = QTD_ACESSO_ENTRADA/3 * 1;
 		int loop2 = QTD_ACESSO_ENTRADA/3 * 2;
-		//System.out.println("Loop1 = "  + loop1 + " - loop2 = " + loop2);
 		
 		for (int i = 0; i < QTD_ACESSO_ENTRADA; i++) {
 			if(i == loop1 || i == loop2) {
-				//sb.append("|- ");
 				for (int j = 0; j < loop.length; j++) {
 					sb.append(loop[indexLoop++]);
 					indexLoop = indexLoop % loop.length;
 				}
-				//sb.append(" -|");
 				i = i + loop.length-1;
 				continue;
 			}

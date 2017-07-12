@@ -1,7 +1,6 @@
 package memoria;
 
 public class MemoriaFisica {	
-	//private int indice;
 	private Integer[] memoriaFisica;
 	private int tamanho = 0;
 	
@@ -21,14 +20,6 @@ public class MemoriaFisica {
 	public int getTamanho() {
 		return this.tamanho;
 	}
-	
-	/*public void setIndice(int pIndice) {
-		this.indice = pIndice;
-	}*/
-	
-	/*public int getIndice(){
-		return this.indice;
-	}*/
 	
 	public Integer[] getMemoria() {
 		return this.memoriaFisica;
