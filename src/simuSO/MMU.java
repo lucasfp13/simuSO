@@ -38,6 +38,7 @@ public class MMU implements Memoria, IClockListener {
 	    		
 	    		Random r = new Random();
 	    		Integer novoValor = r.nextInt(100);
+	    		System.out.println("ESCREVENDO1  " + novoValor);
 	    		this.memFisica.setValor(indiceLivreTemp, novoValor);	
 				
 			// Se tiver espaço na memória física	
@@ -52,6 +53,7 @@ public class MMU implements Memoria, IClockListener {
     			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(tempoAtual);
     			Random r = new Random();
     			Integer valor = r.nextInt(100);	// Pega um valor qualquer, ja que não é relevante no nosso caso
+    			System.out.println("ESCREVENDO2  " + valor);
     			this.memFisica.setValor(indiceLivreTemp, valor);	
 			}			
 			
@@ -118,7 +120,7 @@ public class MMU implements Memoria, IClockListener {
 	}   
     
     private void WS() {
-    	int t = 2000;
+    	int t = 3000;
     	boolean marcada = false;	// marca pagina candidata a ser retirada da memFisica
     	int idadePaginaAtual = 0;
     	// Variaveis temporarias para comparação de pagina mais antiga escolhida a sair
@@ -126,19 +128,22 @@ public class MMU implements Memoria, IClockListener {
     	int iTemp = 0;
     	
     	for(int countPaginas = 0; countPaginas < this.memVirtual.getTamanho(); countPaginas++) {
-    		System.out.println("TEMPO DA PAGINA ATUAL " + this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual());
+    		
+    		// Se a página tiver o bit Presente em 0, passa pra próxima
     		if(this.memVirtual.getPagina(countPaginas).presente() == false){
     			continue;
     		}
     		
+    		// Se a pagia foi referenciada durante o ultimo tick de clock, ela não é candidata à sair do WS 
     		if(this.memVirtual.getPagina(countPaginas).referenciada() == true){
-    			System.out.println("BB");
+    			
     			this.memVirtual.getPagina(countPaginas).setTempoVirtualAtual(this.tempoAtual);
     			idadePaginaAtual = (this.tempoAtual - this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual());
     			idadePaginaTemp = (this.tempoAtual - this.memVirtual.getPagina(iTemp).getTempoVirtualAtual());
     			
+    			// Guardar o indice da pagina mais antiga até então
     			if(idadePaginaAtual >= idadePaginaTemp){
-    				iTemp = countPaginas;
+    				iTemp = countPaginas;	
     				marcada = true;
     			}
     			continue;
@@ -146,10 +151,12 @@ public class MMU implements Memoria, IClockListener {
     		
     		if(this.memVirtual.getPagina(countPaginas).referenciada() == false && (this.tempoAtual - this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual()) > t){
     			Integer moldura = this.memVirtual.getPagina(countPaginas).getMolduraPagina();
+    			
+    			// Verifica se a página foi modificada
     			if(this.memVirtual.getPagina(countPaginas).modificada() == true){
         			this.memoriaHD.swap(this.memFisica.getValor(moldura), countPaginas);
     			}
-      			// Resetar página para tirar a referencia dela para a memoria fisica
+      			// Reseta a página para tirar a referencia dela para a memoria fisica
     			this.memFisica.setValor(this.memVirtual.getPagina(countPaginas).getMolduraPagina(), null);
     			this.memVirtual.getPagina(countPaginas).descartarPagina();
     			marcada = false;
@@ -167,6 +174,8 @@ public class MMU implements Memoria, IClockListener {
     			continue;
     		}
     		
+    		
+    		// Verifica se a página foi marcada
     		if(marcada == true){
     			System.out.println("UKULELE");
     			if(this.memVirtual.getPagina(iTemp).modificada() == true){

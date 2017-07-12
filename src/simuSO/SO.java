@@ -16,7 +16,7 @@ import memoria.MemoriaVirtual;
 public class SO extends JFrame {
 	
 	private JPanel contentPane;
-	public static final Clock CLOCK = new Clock(1000);
+	public static final Clock CLOCK = new Clock(4000);
 	public static final int TAMANHO_MEMORIA_FISICA = 4;
 	public static final int TAMANHO_MEMORIA_VIRTUAL = 8;
 	public static final String LOCAL_HD = "MEMORIA_HD.txt";
@@ -53,6 +53,7 @@ public class SO extends JFrame {
 		Thread log = new Thread(LOG);
 		//log.start();
 		p2.start();
+		
 		
 		// Evento que vai gerar o formulário
 		EventQueue.invokeLater(new Runnable() {
