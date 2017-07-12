@@ -20,18 +20,33 @@ public class Processo implements Runnable {
 			String parts2[] = parts[i].split("-");
 			String w = "W";
 			
-			synchronized(this.mmu){
-				if(parts2[1].equals(w)){
-					System.out.println("Processo " + this.id + " escrevendo na memória");
-					mmu.escrever(Integer.parseInt(parts2[0]), this.id);		// WRITE
-				} else {
-					//System.out.println("Processo " + this.id + " lendo indice " + Integer.parseInt(parts2[0]) + " da memória virtual");
-					mmu.ler(Integer.parseInt(parts2[0]), this.id);		// READ
+			if(parts2[1].equals(w)){
+				synchronized(this.mmu){
+					try {
+						System.out.println("Processo " + this.id + " escrevendo indice " + Integer.parseInt(parts2[0]) + " da memória virtual");
+						mmu.escrever(Integer.parseInt(parts2[0]), this.id);		// WRITE
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
-			}			
+				
+			}
+			
+			if(!parts2[1].equals(w)){
+				synchronized(this.mmu){
+					try {
+						System.out.println("Processo " + this.id + " lendo indice " + Integer.parseInt(parts2[0]) + " da memória virtual");
+						System.out.println("Valor lido: " + mmu.ler(Integer.parseInt(parts2[0]), this.id));	// READ
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+				
+			}
+						
 			
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

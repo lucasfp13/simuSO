@@ -19,74 +19,57 @@ public class MMU implements Memoria, IClockListener {
 
     @Override
 	public void escrever(int pIndiceVirtual, int idProcesso) {
-    	Integer molduraPagina;
-    	// Se o valor da pagina NÃO está presente na memória fisica
-    	if (this.memVirtual.getPagina(pIndiceVirtual).presente() == false) {
+
+    	// Se a pagina NÃO está referenciada (bit P) na memória fisica
+    	if(this.memVirtual.getPagina(pIndiceVirtual).presente() == false) {
     		Integer indiceLivre = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
     		
-    		// Se não tiver espaço na memória física
+    		// Se NÃO tiver espaço na memória física
     		if(indiceLivre == null){
-    			
-    			// Se a pagina estiver sido modificada
-				if(this.memVirtual.getPagina(pIndiceVirtual).modificada() == true){
-					Integer moldPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
-					Integer valorModificado = this.memFisica.getValor(moldPagina);
-					this.memoriaHD.swap(valorModificado, moldPagina);
-					this.memVirtual.getPagina(pIndiceVirtual).descartarPagina();
-					this.WS();
-					
-					Integer indiceLivreTemp = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
-					this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
-	    			this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
-	    			this.memVirtual.getPagina(pIndiceVirtual).modificar(false);
-	    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(indiceLivreTemp);
-	    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
-	    			Integer valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
-	    			this.memFisica.setValor(indiceLivreTemp, valorDoHD);
-					
-				} else {
-					this.WS();
-					
-					Integer indiceLivreTemp = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
-					this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
-	    			this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
-	    			this.memVirtual.getPagina(pIndiceVirtual).modificar(false);
-	    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(indiceLivreTemp);
-	    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
-	    			Integer valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
-	    			this.memFisica.setValor(indiceLivreTemp, valorDoHD);
-				}	
+    					
+				this.WS();
+				
+				Integer indiceLivreTemp = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
+				this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
+	    		this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
+	    		this.memVirtual.getPagina(pIndiceVirtual).modificar(true);
+	    		this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(indiceLivreTemp);
+	    		this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
+	    		
+	    		Random r = new Random();
+	    		Integer novoValor = r.nextInt(100);
+	    		this.memFisica.setValor(indiceLivreTemp, novoValor);	
 				
 			// Se tiver espaço na memória física	
 			} else {
+				
+				Integer indiceLivreTemp = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
 				this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
-    			this.memVirtual.getPagina(pIndiceVirtual).modificar(false);
+    			this.memVirtual.getPagina(pIndiceVirtual).modificar(true);
     			this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
-    			this.memVirtual.getPagina(pIndiceVirtual).setIndice(pIndiceVirtual);
-    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(indiceLivre);
+    			
+    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(indiceLivreTemp);
     			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(tempoAtual);
-    			Integer valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
-    			this.memFisica.setValor(indiceLivre, valorDoHD);	
+    			Random r = new Random();
+    			Integer valor = r.nextInt(100);	// Pega um valor qualquer, ja que não é relevante no nosso caso
+    			this.memFisica.setValor(indiceLivreTemp, valor);	
 			}			
 			
     	//	Se o valor da pagina está presente na memória fisica	
 		} else {	
-			
-			molduraPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
-			
-			if(this.memVirtual.getPagina(pIndiceVirtual).modificada() == true){
+					
+			Integer molduraPagina = memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
+			/*if(this.memVirtual.getPagina(pIndiceVirtual).modificada() == true){
 				Integer valorModificado = this.memFisica.getValor(molduraPagina);
 				this.memoriaHD.swap(valorModificado, pIndiceVirtual);
-			}
+			}*/
 			
 			Random r = new Random();		
 			Integer novoValor = r.nextInt(100);	// Gerando um valor aleatório, já que não importa para o nosso caso
 			System.out.println("Escrevendo valor " + novoValor + " na memória física");
-			
+			this.memFisica.setValor(molduraPagina, novoValor);
 			this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
 			this.memVirtual.getPagina(pIndiceVirtual).modificar(true);
-			this.memFisica.setValor(molduraPagina, novoValor);
-			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(molduraPagina);
 			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
 		}
 	}
@@ -97,45 +80,28 @@ public class MMU implements Memoria, IClockListener {
     	
     	try {
     		if(this.memVirtual.getPagina(pIndiceVirtual).presente() == false){   		
-	    		Integer indiceMF = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
-	    		// Se a moldura estiver livre
-	    		if(indiceMF != null){
+	    		Integer indiceLivre = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
+	    		//System.out.println(indiceLivre);
+	    		// Se a memória física tiver espaço
+	    		if(indiceLivre != null){
 	    			this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
 	    			this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
 	    			this.memVirtual.getPagina(pIndiceVirtual).modificar(false);
-	    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(indiceMF);
+	    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(indiceLivre);
 	    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
+	    			System.out.println(this.tempoAtual);
 	    			valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
-	    			this.memFisica.setValor(indiceMF, valorDoHD);
+	    			this.memFisica.setValor(indiceLivre, valorDoHD);
 	    		} else {
 	    			
-	    			// Verifica o bit M
-	    			if(this.memVirtual.getPagina(pIndiceVirtual).modificada() == true){
-						Integer moldPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
-						Integer valorModificado = this.memFisica.getValor(moldPagina);
-						this.memoriaHD.swap(valorModificado, moldPagina);
-	
-						this.WS();
-						this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
-		    			this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
-		    			this.memVirtual.getPagina(pIndiceVirtual).modificar(false);
-		    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(moldPagina);
-		    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
-		    			valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
-		    			this.memFisica.setValor(moldPagina, valorDoHD);
-						
-					} else {
-						Integer molduraPagina = this.memVirtual.getPagina(pIndiceVirtual).getMolduraPagina();
-						this.WS();
-						
-						this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
-		    			this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
-		    			this.memVirtual.getPagina(pIndiceVirtual).modificar(false);
-		    			this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(molduraPagina);
-		    			this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
-		    			valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
-		    			this.memFisica.setValor(molduraPagina, valorDoHD);
-					}
+					this.WS();
+					Integer molduraPagina = this.memFisica.getIndiceLivre(this.memFisica.getMemoria());
+					this.memVirtual.getPagina(pIndiceVirtual).presenca(true);
+		    		this.memVirtual.getPagina(pIndiceVirtual).referenciar(true);
+		    		this.memVirtual.getPagina(pIndiceVirtual).setMolduraPagina(molduraPagina);
+		    		this.memVirtual.getPagina(pIndiceVirtual).setTempoVirtualAtual(this.tempoAtual);
+		    		valorDoHD = this.memoriaHD.getValorHD(pIndiceVirtual);
+		    		this.memFisica.setValor(molduraPagina, valorDoHD);
 	    		}
 	    		
 			} else {
@@ -152,7 +118,7 @@ public class MMU implements Memoria, IClockListener {
 	}   
     
     private void WS() {
-    	int t = 10;
+    	int t = 2000;
     	boolean marcada = false;	// marca pagina candidata a ser retirada da memFisica
     	int idadePaginaAtual = 0;
     	// Variaveis temporarias para comparação de pagina mais antiga escolhida a sair
@@ -160,19 +126,17 @@ public class MMU implements Memoria, IClockListener {
     	int iTemp = 0;
     	
     	for(int countPaginas = 0; countPaginas < this.memVirtual.getTamanho(); countPaginas++) {
+    		System.out.println("TEMPO DA PAGINA ATUAL " + this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual());
     		if(this.memVirtual.getPagina(countPaginas).presente() == false){
-    			System.out.println("AAAAAAAAA");
     			continue;
     		}
     		
     		if(this.memVirtual.getPagina(countPaginas).referenciada() == true){
-    			System.out.println("BBBBBBBB");
+    			System.out.println("BB");
     			this.memVirtual.getPagina(countPaginas).setTempoVirtualAtual(this.tempoAtual);
     			idadePaginaAtual = (this.tempoAtual - this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual());
     			idadePaginaTemp = (this.tempoAtual - this.memVirtual.getPagina(iTemp).getTempoVirtualAtual());
     			
-    			System.out.println(this.tempoAtual);
-    			//System.out.println(i);
     			if(idadePaginaAtual >= idadePaginaTemp){
     				iTemp = countPaginas;
     				marcada = true;
@@ -181,21 +145,18 @@ public class MMU implements Memoria, IClockListener {
     		}
     		
     		if(this.memVirtual.getPagina(countPaginas).referenciada() == false && (this.tempoAtual - this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual()) > t){
-    			System.out.println("CCCCCC");
-    			Integer moldura2Swap = this.memVirtual.getPagina(countPaginas).getMolduraPagina();
-    			System.out.println(moldura2Swap);
-    			Integer valor = this.memFisica.getValor(moldura2Swap);
-   
-    			this.memoriaHD.swap(valor, countPaginas);
-      			// Limpar pagina removida da memoria fisica
-    			this.memFisica.setValor(moldura2Swap, null);
+    			Integer moldura = this.memVirtual.getPagina(countPaginas).getMolduraPagina();
+    			if(this.memVirtual.getPagina(countPaginas).modificada() == true){
+        			this.memoriaHD.swap(this.memFisica.getValor(moldura), countPaginas);
+    			}
+      			// Resetar página para tirar a referencia dela para a memoria fisica
+    			this.memFisica.setValor(this.memVirtual.getPagina(countPaginas).getMolduraPagina(), null);
     			this.memVirtual.getPagina(countPaginas).descartarPagina();
-    			marcada = true;
+    			marcada = false;
     			break;
     		}
     		
     		if(this.memVirtual.getPagina(countPaginas).referenciada() == false && (this.tempoAtual - this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual()) <= t){
-    			System.out.println("DDDDDDDDD");
     			idadePaginaAtual = (this.tempoAtual - this.memVirtual.getPagina(countPaginas).getTempoVirtualAtual());
     			idadePaginaTemp = (this.tempoAtual - this.memVirtual.getPagina(iTemp).getTempoVirtualAtual());
     			
@@ -208,11 +169,14 @@ public class MMU implements Memoria, IClockListener {
     		
     		if(marcada == true){
     			System.out.println("UKULELE");
-    			Integer moldura2Swap = this.memVirtual.getPagina(countPaginas).getMolduraPagina();
-    			Integer valor = this.memFisica.getValor(moldura2Swap);
-    			this.memoriaHD.swap(valor, countPaginas);
+    			if(this.memVirtual.getPagina(iTemp).modificada() == true){
+    				Integer moldura2Swap = this.memVirtual.getPagina(countPaginas).getMolduraPagina();
+    				Integer valor = this.memFisica.getValor(moldura2Swap);
+    				this.memoriaHD.swap(valor, countPaginas);
+    			}
     			
     			// Desreferenciar a pagina da memoria fisca 
+    			this.memFisica.setValor(this.memVirtual.getPagina(iTemp).getMolduraPagina(), null);
     			this.memVirtual.getPagina(countPaginas).descartarPagina();
     		}
     	}

@@ -34,24 +34,25 @@ public class SO extends JFrame {
 		//String inputProcesso2 = fab2.getNewEntrada(); 
 		//System.out.println("fab2 = " + inputProcesso2);
 		
-		String input1 = "8-R,7-R,7-R,3-W,2-W,4-R,7-W,2-W,0-R,1-W,0-W,5-R,6-R,8-W,1-R,2-W";
+		String input1 = "6-R,7-R,7-R,3-W,2-W,4-R,7-W,2-W,0-R,1-W,0-W,5-R,6-R,7-W,1-R,2-W";
+		String input2 = "5-R,0-R,3-R,3-W,0-W,7-R,7-W,1-W,4-R,5-W,1-W,5-R,0-R,5-W,2-R,3-W";
 		
 		CLOCK.adicionaListener(mmu);
 		
 		Processo processo1 = new Processo(mmu, input1, 1);
-		//Processo processo2 = new Processo(mmu, inputProcesso2, 2);
+		Processo processo2 = new Processo(mmu, input2, 2);
 		
 		Thread clock = new Thread(CLOCK);
 		clock.start();
 		
 		Thread p1 = new Thread(processo1);
-		//Thread p2 = new Thread(processo2);
+		Thread p2 = new Thread(processo2);
 				
 		p1.start();
 		
 		Thread log = new Thread(LOG);
 		//log.start();
-		//p2.start();
+		p2.start();
 		
 		// Evento que vai gerar o formulário
 		EventQueue.invokeLater(new Runnable() {
