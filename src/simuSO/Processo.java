@@ -46,13 +46,15 @@ public class Processo implements Runnable {
 						
 			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(SO.INTERVALO_PROCESSO);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 		}
+		
+		System.out.println("Processo " + this.id + " terminou.");
 	}
 
 }
