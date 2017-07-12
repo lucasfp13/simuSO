@@ -77,24 +77,10 @@ public class TelaLog extends JFrame {
 		lblMemriaVirtual.setBounds(12, 13, 109, 16);
 		panel_1.add(lblMemriaVirtual);
 		
-		JList<Integer> list_1 = new JList<Integer>();
-		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list_1.setVisibleRowCount(100);
-		list_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		list_1.setBounds(380, 42, 117, 293);
-		panel_1.add(list_1);
-		
 		JLabel lblMemriaFsica = new JLabel("Mem\u00F3ria F\u00EDsica:");
 		lblMemriaFsica.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblMemriaFsica.setBounds(380, 13, 109, 16);
 		panel_1.add(lblMemriaFsica);
-		
-		JList<Integer> list_2 = new JList<Integer>();
-		list_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list_2.setVisibleRowCount(100);
-		list_2.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		list_2.setBounds(509, 42, 117, 293);
-		panel_1.add(list_2);
 		
 		JLabel lblMemriaHd = new JLabel("Mem\u00F3ria HD:");
 		lblMemriaHd.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -117,7 +103,28 @@ public class TelaLog extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(91);
 		table.getColumnModel().getColumn(2).setPreferredWidth(115);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setEnabled(false);
 		scrollPane.setViewportView(table);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(380, 42, 117, 293);
+		panel_1.add(scrollPane_1);
+		
+		JList<Integer> list = new JList<Integer>();
+		list.setVisibleRowCount(100);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		scrollPane_1.setViewportView(list);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(507, 42, 119, 294);
+		panel_1.add(scrollPane_2);
+		
+		JList<Integer> list_1 = new JList<Integer>();
+		list_1.setVisibleRowCount(100);
+		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		scrollPane_2.setViewportView(list_1);
 		
 		JButton btnAtualizarInformaes = new JButton("Atualizar Informa\u00E7\u00F5es");
 		btnAtualizarInformaes.addMouseListener(new MouseAdapter() {
@@ -130,8 +137,8 @@ public class TelaLog extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				
 				//list.setModel(modelListMemoriaVirtual);
-				list_1.setModel(modelListMemoriaFisica);
-				list_2.setModel(modelListMemoriaHD);
+				list.setModel(modelListMemoriaFisica);
+				list_1.setModel(modelListMemoriaHD);
 				
 				int tableSize = model.getRowCount();
 				
