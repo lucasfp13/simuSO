@@ -1,5 +1,5 @@
 # simuSO
-Simulação de um sistema operacional
+Simulação da MMU de um sistema operacional utilizando o algoritmo Working Set.
 ### Contribuidores
     Dayvid Silva
     Fernando Patriota
